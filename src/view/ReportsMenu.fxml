@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="364.0" prefWidth="467.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportsMenu">
+   <children>
+      <AnchorPane layoutX="7.0" layoutY="4.0" prefHeight="351.0" prefWidth="450.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+         <children>
+            <Label layoutX="22.0" layoutY="22.0" text="Reports">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="81.0" layoutY="98.0" mnemonicParsing="false" text="Total Number of Customer Appointments" />
+            <Button layoutX="81.0" layoutY="162.0" mnemonicParsing="false" text="Contact Schedule" />
+            <Button layoutX="81.0" layoutY="225.0" mnemonicParsing="false" text="TBD" />
+            <Button fx:id="BackBtn" layoutX="381.0" layoutY="300.0" mnemonicParsing="false" onAction="#onBack" text="Back" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
