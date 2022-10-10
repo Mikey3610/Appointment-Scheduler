@@ -15,6 +15,7 @@ public abstract class CustomersDAO {
         ps.setInt(5, divisionId);
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
+        //test comment
     }
 
     public static int updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId) throws SQLException {
