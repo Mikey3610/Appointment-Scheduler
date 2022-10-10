@@ -27,18 +27,18 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Customer Name" GridPane.rowIndex="1" />
-                  <Label text="Address" GridPane.rowIndex="2" />
-                  <Label text="Postal Code" GridPane.rowIndex="3" />
-                  <Label text="Phone Number" GridPane.rowIndex="4" />
+                  <Label text="Title" GridPane.rowIndex="1" />
+                  <Label text="Description" GridPane.rowIndex="2" />
+                  <Label text="Location" GridPane.rowIndex="3" />
+                  <Label text="Start Date" GridPane.rowIndex="4" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <TextField editable="false" GridPane.columnIndex="1" />
-                  <Label text="Customer ID" />
-                  <Label text="Country" GridPane.rowIndex="5" />
-                  <Label text="Division" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Label text="Appointment ID" />
+                  <Label text="Start Time" GridPane.rowIndex="5" />
+                  <Label text="End Time" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -48,6 +48,46 @@
                   </Label>
                   <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <Label text="End Date" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></Label>
+                  <Label text="User ID" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></Label>
+                  <Label text="Customer ID" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></Label>
+                  <Label text="Type" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></Label>
+                  <Label text="Contact" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></Label>
+                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <DatePicker GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" />
+                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <Label layoutX="21.0" layoutY="14.0" text="Modify Appointment">
