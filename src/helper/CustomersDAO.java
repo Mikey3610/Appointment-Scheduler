@@ -39,7 +39,7 @@ public abstract class CustomersDAO {
         return rowsAffected;
     }
 
-    public static void select() throws SQLException {
+    public static void selectAllCustomers() throws SQLException {
         String sql = "SELECT * FROM CUSTOMERS";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
@@ -54,4 +54,22 @@ public abstract class CustomersDAO {
             System.out.print(customerName + "\n");
         }
     }
+    /*
+     public static void selectAllCustomers(int customerId) throws SQLException {
+        String sql = "SELECT * FROM CUSTOMERS WHERE Customer_ID =?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1,"customerId");
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            int customerIdFK = rs.getInt("Customer_ID");
+            String customerName = rs.getString("Customer_Name");
+            String address = rs.getString("Address");
+            String postalCode = rs.getString("Postal_Code");
+            String phone = rs.getString("Phone");
+            int divisionId = rs.getInt("Division_ID");
+            System.out.print(customerIdFK + " | ");
+            System.out.print(customerName + "\n");
+        }
+    }
+    */
 }
