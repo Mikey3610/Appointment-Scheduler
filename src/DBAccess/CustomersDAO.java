@@ -1,4 +1,6 @@
-package helper;
+package DBAccess;
+
+import helper.JDBC;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,8 +52,8 @@ public abstract class CustomersDAO {
             String postalCode = rs.getString("Postal_Code");
             String phone = rs.getString("Phone");
             int divisionId = rs.getInt("Division_ID");
-            System.out.print(customerId + " | ");
-            System.out.print(customerName + "\n");
+            //System.out.print(customerId + " | ");
+            //System.out.print(customerName + "\n");
         }
     }
     /*

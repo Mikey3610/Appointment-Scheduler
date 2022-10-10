@@ -1,14 +1,14 @@
 package model;
 
 public class Countries {
-    private int id;
-    private String name;
+    private int countryId;
+    private String countryName;
 
     public Countries(int id, String name){
-        this.id = id;
-        this.name = name;
+        this.countryId = id;
+        this.countryName = name;
     }
-    public int getId(){return id;}
+    public int getId(){return countryId;}
 
-    public String getName(){return name;}
+    public String getName(){return countryName;}
 }

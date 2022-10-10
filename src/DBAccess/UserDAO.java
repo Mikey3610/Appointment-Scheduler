@@ -1,5 +1,6 @@
-package helper;
+package DBAccess;
 
+import helper.JDBC;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -16,8 +17,8 @@ public abstract class UserDAO {
         ResultSet rs = preparedStatement.executeQuery();
         if(rs.next()) {
             int userId = rs.getInt("User_ID");
-            User valUser = new User(userId, userName, password);
-            return valUser;
+            User validatedUser = new User(userId, userName, password);
+            return validatedUser;
         }
         return null;
     }
