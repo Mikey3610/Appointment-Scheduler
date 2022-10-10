@@ -1,6 +1,7 @@
 package helper;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class CustomersDAO {
@@ -15,7 +16,6 @@ public abstract class CustomersDAO {
         ps.setInt(5, divisionId);
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
-        //test comment
     }
 
     public static int updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId) throws SQLException {
@@ -31,5 +31,27 @@ public abstract class CustomersDAO {
         return rowsAffected;
     }
 
-    //public static int deleteCustomer()
+    public static int deleteCustomer(int customerId) throws SQLException {
+        String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1, customerId);
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+    }
+
+    public static void select() throws SQLException {
+        String sql = "SELECT * FROM CUSTOMERS";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            int customerId = rs.getInt("Customer_ID");
+            String customerName = rs.getString("Customer_Name");
+            String address = rs.getString("Address");
+            String postalCode = rs.getString("Postal_Code");
+            String phone = rs.getString("Phone");
+            int divisionId = rs.getInt("Division_ID");
+            System.out.print(customerId + " | ");
+            System.out.print(customerName + "\n");
+        }
+    }
 }
