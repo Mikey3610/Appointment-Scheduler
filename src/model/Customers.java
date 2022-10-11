@@ -14,6 +14,7 @@ public class Customers {
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
+        this.divisionId = divisionId;
     }
 
     public int getCustomerId() {

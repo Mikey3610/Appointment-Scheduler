@@ -60,6 +60,11 @@ public class LoginScreen implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(rb.getString("IncorrectLogin"));
+            alert.showAndWait();
+        }
 
     }
 
