@@ -1,9 +1,14 @@
 package controller;
 
+import DBAccess.UserDAO;
 import javafx.event.ActionEvent;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,6 +52,14 @@ public class LoginScreen implements Initializable {
     public void onLogin(ActionEvent actionEvent) throws IOException, SQLException {
         String userName = UserNameText.getText();
         String password = PasswordText.getText();
+        if(UserDAO.validatedUser(userName, password)){
+            Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 970, 450);
+            stage.setTitle("Main Appointment Screen");
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 

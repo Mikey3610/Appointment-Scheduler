@@ -1,6 +1,9 @@
 package DBAccess;
 
 import helper.JDBC;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.Customers;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,10 +44,11 @@ public abstract class CustomersDAO {
         return rowsAffected;
     }
 
-    public static void selectAllCustomers() throws SQLException {
+    public static ObservableList<Customers> selectAllCustomers() throws SQLException {
         String sql = "SELECT * FROM CUSTOMERS";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
+        ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
         while(rs.next()){
             int customerId = rs.getInt("Customer_ID");
             String customerName = rs.getString("Customer_Name");
@@ -52,9 +56,12 @@ public abstract class CustomersDAO {
             String postalCode = rs.getString("Postal_Code");
             String phone = rs.getString("Phone");
             int divisionId = rs.getInt("Division_ID");
-            //System.out.print(customerId + " | ");
-            //System.out.print(customerName + "\n");
+
+            Customers customers = new Customers(customerId, customerName, address, postalCode, phone, divisionId);
+            allCustomers.add(customers);
+
         }
+        return allCustomers;
     }
     /*
      public static void selectAllCustomers(int customerId) throws SQLException {

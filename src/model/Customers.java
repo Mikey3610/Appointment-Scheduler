@@ -6,8 +6,9 @@ public class Customers {
     private String address;
     private String postalCode;
     private String phone;
+    private int divisionId;
 
-    public Customers(int customerId, String customerName, String address, String postalCode, String phone){
+    public Customers(int customerId, String customerName, String address, String postalCode, String phone, int divisionId){
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
@@ -33,5 +34,9 @@ public class Customers {
 
     public String getPhone() {
         return phone;
+    }
+
+    public int getDivisionId() {
+        return divisionId;
     }
 }
