@@ -13,21 +13,21 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TableView layoutX="62.0" layoutY="110.0" prefHeight="319.0" prefWidth="603.0">
+            <TableView fx:id="customerTable" layoutX="62.0" layoutY="110.0" prefHeight="319.0" prefWidth="603.0">
               <columns>
-                <TableColumn prefWidth="81.0" text="Customer ID" />
-                <TableColumn prefWidth="99.0" text="Customer Name" />
-                  <TableColumn prefWidth="71.0" text="Address" />
-                  <TableColumn prefWidth="85.0" text="Postal Code" />
-                  <TableColumn prefWidth="93.0" text="Phone Number" />
-                  <TableColumn prefWidth="81.0" text="Country" />
-                  <TableColumn prefWidth="91.0" text="Division ID" />
+                <TableColumn fx:id="customerIdCol" prefWidth="81.0" text="Customer ID" />
+                <TableColumn fx:id="customerNameCol" prefWidth="99.0" text="Customer Name" />
+                  <TableColumn fx:id="addressCol" prefWidth="71.0" text="Address" />
+                  <TableColumn fx:id="postalCodeCol" prefWidth="85.0" text="Postal Code" />
+                  <TableColumn fx:id="phoneNumberCol" prefWidth="93.0" text="Phone Number" />
+                  <TableColumn fx:id="countryCol" prefWidth="81.0" text="Country" />
+                  <TableColumn fx:id="divisionIdCol" prefWidth="91.0" text="Division ID" />
               </columns>
             </TableView>
-            <Button layoutX="62.0" layoutY="495.0" mnemonicParsing="false" text="Add Customer" />
-            <Button layoutX="181.0" layoutY="495.0" mnemonicParsing="false" text="Modify Customer" />
-            <Button layoutX="322.0" layoutY="495.0" mnemonicParsing="false" text="Delete Customer" />
-            <Button layoutX="498.0" layoutY="495.0" mnemonicParsing="false" text="Back to Appointment Screen" />
+            <Button fx:id="AddCustomer" layoutX="62.0" layoutY="495.0" mnemonicParsing="false" onAction="#onAddCust" text="Add Customer" />
+            <Button fx:id="ModifyCustomer" layoutX="181.0" layoutY="495.0" mnemonicParsing="false" onAction="#onModifyCust" text="Modify Customer" />
+            <Button fx:id="DeleteCust" layoutX="322.0" layoutY="495.0" mnemonicParsing="false" onAction="#onDeleteCust" text="Delete Customer" />
+            <Button fx:id="Back" layoutX="498.0" layoutY="495.0" mnemonicParsing="false" text="Back to Appointment Screen" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

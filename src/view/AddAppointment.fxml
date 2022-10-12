@@ -97,8 +97,8 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button layoutX="507.0" layoutY="397.0" mnemonicParsing="false" text="Save" />
-            <Button layoutX="595.0" layoutY="397.0" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="SaveAppt" layoutX="507.0" layoutY="397.0" mnemonicParsing="false" onAction="#onSaveAppt" text="Save" />
+            <Button fx:id="CancelAppt" layoutX="595.0" layoutY="397.0" mnemonicParsing="false" onAction="#onCancelAppt" text="Cancel" />
          </children>
       </AnchorPane>
    </children>
