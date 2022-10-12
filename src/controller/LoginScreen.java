@@ -55,7 +55,7 @@ public class LoginScreen implements Initializable {
         if(UserDAO.validatedUser(userName, password)){
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 970, 450);
+            Scene scene = new Scene(root, 850, 600);
             stage.setTitle("Main Appointment Screen");
             stage.setScene(scene);
             stage.show();

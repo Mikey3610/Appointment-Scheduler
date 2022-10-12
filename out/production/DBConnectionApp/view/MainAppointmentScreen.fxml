@@ -23,23 +23,20 @@
                   <TableColumn prefWidth="70.0" text="User_ID" />
               </columns>
             </TableView>
-            <RadioButton fx:id="ViewApptMonth" layoutX="346.0" layoutY="82.0" mnemonicParsing="false" onAction="#onViewMonth" text="Month">
-               <toggleGroup>
-                  <ToggleGroup fx:id="tGroupCustOrAppt" />
-               </toggleGroup></RadioButton>
-            <RadioButton fx:id="ViewApptWeek" layoutX="284.0" layoutY="82.0" mnemonicParsing="false" onAction="#onViewWeek" text="Week" toggleGroup="$tGroupCustOrAppt" />
-            <Label fx:id="ApptOrCust" layoutX="14.0" layoutY="14.0" text="Appointments">
+            <RadioButton fx:id="ViewApptMonth" layoutX="346.0" layoutY="82.0" mnemonicParsing="false" onAction="#onViewMonth" text="Month" />
+            <RadioButton fx:id="ViewApptWeek" layoutX="284.0" layoutY="82.0" mnemonicParsing="false" onAction="#onViewWeek" text="Week" />
+            <Label layoutX="14.0" layoutY="14.0" text="Appointments">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <RadioButton fx:id="ViewApptAll" layoutX="413.0" layoutY="82.0" mnemonicParsing="false" onAction="#onViewAll" text="View All" toggleGroup="$tGroupCustOrAppt" />
+            <RadioButton fx:id="ViewApptAll" layoutX="413.0" layoutY="82.0" mnemonicParsing="false" onAction="#onViewAll" text="View All" />
             <ComboBox layoutX="497.0" layoutY="78.0" prefWidth="150.0" promptText="View Appt by:" />
-            <Button fx:id="AddApptOrCust" layoutX="96.0" layoutY="472.0" mnemonicParsing="false" onAction="#onAddApptOrCust" text="Add Appointment" />
-            <Button fx:id="ModifyApptOrCust" layoutX="244.0" layoutY="472.0" mnemonicParsing="false" onAction="#onModifyApptOrCust" text="Modify Appointment" />
-            <Button fx:id="DeleteApptOrCust" layoutX="412.0" layoutY="472.0" mnemonicParsing="false" onAction="#onDeleteApptOrCust" text="Delete Appointment" />
+            <Button fx:id="AddAppt" layoutX="96.0" layoutY="472.0" mnemonicParsing="false" onAction="#onAddAppt" text="Add Appointment" />
+            <Button fx:id="ModifyAppt" layoutX="244.0" layoutY="472.0" mnemonicParsing="false" onAction="#onModifyAppt" text="Modify Appointment" />
+            <Button fx:id="DeleteAppt" layoutX="412.0" layoutY="472.0" mnemonicParsing="false" onAction="#onDeleteAppt" text="Delete Appointment" />
             <Button layoutX="681.0" layoutY="472.0" mnemonicParsing="false" text="Reports" />
-            <RadioButton fx:id="ViewCust" layoutX="168.0" layoutY="82.0" mnemonicParsing="false" onAction="#onViewCust" text="View Customers" toggleGroup="$tGroupCustOrAppt" />
+            <RadioButton fx:id="ViewCust" layoutX="168.0" layoutY="82.0" mnemonicParsing="false" onAction="#onViewCust" text="View Customers" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

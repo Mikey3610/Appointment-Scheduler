@@ -37,50 +37,32 @@ public class MainAppointmentScreen implements Initializable {
     }
 
     public void onViewWeek(ActionEvent actionEvent) {
-        ApptOrCust.setText("Appointments");
-        AddApptOrCust.setText("Add Appointment");
-        ModifyApptOrCust.setText("Change Appointment");
-        DeleteApptOrCust.setText("Delete Appointment");
+
     }
 
     public void onViewMonth(ActionEvent actionEvent) {
-        ApptOrCust.setText("Appointments");
-        AddApptOrCust.setText("Add Appointment");
-        ModifyApptOrCust.setText("Change Appointment");
-        DeleteApptOrCust.setText("Delete Appointment");
+
     }
 
     public void onViewAll(ActionEvent actionEvent) {
-        ApptOrCust.setText("Appointments");
-        AddApptOrCust.setText("Add Appointment");
-        ModifyApptOrCust.setText("Change Appointment");
-        DeleteApptOrCust.setText("Delete Appointment");
+
     }
 
     public void onViewCust(ActionEvent actionEvent) {
-        ApptOrCust.setText("Customer View");
-        AddApptOrCust.setText("Add Customer");
-        ModifyApptOrCust.setText("Change Customer");
-        DeleteApptOrCust.setText("Delete Customer");
+
     }
 
-    public void onAddApptOrCust(ActionEvent actionEvent) throws IOException {
-        if (AddApptOrCust.equals("Add Appointment")){
-            Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
-            Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 900, 640);
-            stage.setTitle("Add Appointment Form");
-            stage.setScene(scene);
-            stage.show();
-        }
+    public void onAddAppt(ActionEvent actionEvent) throws IOException {
+
     }
 
-    public void onModifyApptOrCust(ActionEvent actionEvent) {
+    public void onModifyAppt(ActionEvent actionEvent) {
     }
 
-    public void onDeleteApptOrCust(ActionEvent actionEvent) {
+    public void onDeleteAppt(ActionEvent actionEvent) {
     }
 
 
-
+    public void onCustTable(ActionEvent actionEvent) {
+    }
 }
