@@ -27,7 +27,7 @@
             <Button fx:id="AddCustomer" layoutX="62.0" layoutY="495.0" mnemonicParsing="false" onAction="#onAddCust" text="Add Customer" />
             <Button fx:id="ModifyCustomer" layoutX="181.0" layoutY="495.0" mnemonicParsing="false" onAction="#onModifyCust" text="Modify Customer" />
             <Button fx:id="DeleteCust" layoutX="322.0" layoutY="495.0" mnemonicParsing="false" onAction="#onDeleteCust" text="Delete Customer" />
-            <Button fx:id="Back" layoutX="498.0" layoutY="495.0" mnemonicParsing="false" text="Back to Appointment Screen" />
+            <Button fx:id="BackToAppointments" layoutX="498.0" layoutY="495.0" mnemonicParsing="false" onAction="#onBacktoAppts" text="Back to Appointment Screen" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

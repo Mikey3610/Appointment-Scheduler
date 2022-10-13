@@ -14,6 +14,7 @@ import model.Customers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerScreen implements Initializable {
@@ -46,7 +47,7 @@ public class CustomerScreen implements Initializable {
     public void onAddCust(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddCustomer.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 970, 450);
+        Scene scene = new Scene(root, 850, 550);
         stage.setTitle("Add Customer");
         stage.setScene(scene);
         stage.show();
@@ -62,5 +63,21 @@ public class CustomerScreen implements Initializable {
     }
 
     public void onDeleteCust(ActionEvent actionEvent) {
+    }
+
+    public void onBacktoAppts(ActionEvent actionEvent) throws IOException {
+        Alert cancellation = new Alert(Alert.AlertType.CONFIRMATION);
+        cancellation.setTitle("Confirm Cancellation");
+        cancellation.setContentText("Discard changes and return to Appointments Screen?");
+        Optional<ButtonType> result = cancellation.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 850, 600);
+            stage.setTitle("Main Appointment Screen");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 }

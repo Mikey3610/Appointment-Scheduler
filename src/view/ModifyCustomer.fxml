@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="497.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModifyCustomer">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="467.0" prefWidth="654.0">
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="467.0" prefWidth="654.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <children>
             <GridPane layoutX="22.0" layoutY="105.0" prefHeight="269.0" prefWidth="567.0">
               <columnConstraints>
@@ -53,6 +53,8 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
+            <Button fx:id="CancelModifyCust" layoutX="569.0" layoutY="428.0" mnemonicParsing="false" onAction="#onCancelModifyCust" text="Cancel" />
+            <Button fx:id="SaveModifyCust" layoutX="492.0" layoutY="428.0" mnemonicParsing="false" onAction="#onSaveModifyCust" text="Save" />
          </children>
       </AnchorPane>
    </children>

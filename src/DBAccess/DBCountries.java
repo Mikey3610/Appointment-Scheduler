@@ -13,9 +13,7 @@ public class DBCountries {
 
         try{
             String sql = "SELECT * from countries";
-
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
@@ -43,5 +41,21 @@ public class DBCountries {
         } catch (SQLException throwables){
             throwables.printStackTrace();
         }
+    }
+
+    public static Countries getCountryDivisionId(int divisionId) throws SQLException {
+        String sql = "SELECT C.* FROM Countries AS C INNER JOIN First_Level_Divisions AS D ON C.COUNTRY_ID = D.COUNTRY_ID AND D.DIVISION_ID = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setInt(1, divisionId);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()){
+            int countryId = rs.getInt("Country_ID");
+            String countryName = rs.getString("Country");
+
+            Countries countries = new Countries(countryId, countryName);
+            return countries;
+        }
+        return null;
     }
 }

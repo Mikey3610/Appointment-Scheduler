@@ -55,7 +55,7 @@ public class MainAppointmentScreen implements Initializable {
     public void onAddAppt(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 970, 450);
+        Scene scene = new Scene(root, 750, 500);
         stage.setTitle("Add Customer");
         stage.setScene(scene);
         stage.show();
@@ -64,8 +64,8 @@ public class MainAppointmentScreen implements Initializable {
     public void onModifyAppt(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyAppointment.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 970, 450);
-        stage.setTitle("Add Customer");
+        Scene scene = new Scene(root, 900, 550);
+        stage.setTitle("Modify Appointment");
         stage.setScene(scene);
         stage.show();
     }
@@ -77,7 +77,7 @@ public class MainAppointmentScreen implements Initializable {
     public void onCustTable(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 970, 450);
+        Scene scene = new Scene(root, 850, 600);
         stage.setTitle("Add Customer");
         stage.setScene(scene);
         stage.show();
