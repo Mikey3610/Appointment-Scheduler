@@ -63,6 +63,24 @@ public abstract class CustomersDAO {
         }
         return allCustomers;
     }
+
+    public static Customers selectCustomer(int customerId) throws SQLException {
+        String sql = "SELECT * FROM CUSTOMERS WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1, customerId);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            String customerName = rs.getString("Customer_Name");
+            String phone = rs.getString("Phone");
+            String address = rs.getString("Address");
+            String postalCode = rs.getString("Postal_Code");
+            int divisionId = rs.getInt("Division_ID");
+
+            Customers customer = new Customers(customerId, customerName, phone, address, postalCode, divisionId);
+            return customer;
+        }
+        return null;
+    }
     /*
      public static void selectAllCustomers(int customerId) throws SQLException {
         String sql = "SELECT * FROM CUSTOMERS WHERE Customer_ID =?";
