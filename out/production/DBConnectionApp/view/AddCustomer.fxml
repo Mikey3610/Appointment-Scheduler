@@ -52,8 +52,8 @@
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <Button layoutX="660.0" layoutY="421.0" mnemonicParsing="false" text="Cancel" />
-            <Button layoutX="589.0" layoutY="421.0" mnemonicParsing="false" text="Save" />
+            <Button fx:id="CancelCustomer" layoutX="660.0" layoutY="421.0" mnemonicParsing="false" onAction="#onCancelCust" text="Cancel" />
+            <Button fx:id="SaveCustomer" layoutX="589.0" layoutY="421.0" mnemonicParsing="false" onAction="#onSaveCust" text="Save" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

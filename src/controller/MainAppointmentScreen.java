@@ -82,4 +82,13 @@ public class MainAppointmentScreen implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void onReports(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ReportsMenu.fxml"));
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 500, 400);
+        stage.setTitle("Reports Menu");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

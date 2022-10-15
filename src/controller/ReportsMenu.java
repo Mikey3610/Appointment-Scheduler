@@ -15,14 +15,12 @@ import java.util.Optional;
 
 public class ReportsMenu {
         public void onBack(ActionEvent actionEvent) throws IOException {
-            Alert cancellation = new Alert(Alert.AlertType.CONFIRMATION);
-            cancellation.setTitle("Return to Main Screen");
-            cancellation.setContentText("Go back?");
-            Optional<ButtonType> result = cancellation.showAndWait();
-
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                toMainAppointmentScreen(actionEvent);
-            }
+            Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 850, 600);
+            stage.setTitle("Appointments Screen");
+            stage.setScene(scene);
+            stage.show();
     }
 
     public void toMainAppointmentScreen(ActionEvent actionEvent) throws IOException {
@@ -30,6 +28,24 @@ public class ReportsMenu {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 970, 450);
         stage.setTitle("Main Appointment Screen");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void onTotalCustAppts(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerApptsReport.fxml"));
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 850, 600);
+        stage.setTitle("Total Customer Reports");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void onContactSchedule(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ContactsReport.fxml"));
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 850, 600);
+        stage.setTitle("Contacts Schedule");
         stage.setScene(scene);
         stage.show();
     }

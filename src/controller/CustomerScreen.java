@@ -56,7 +56,7 @@ public class CustomerScreen implements Initializable {
     public void onModifyCust(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyCustomer.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 970, 450);
+        Scene scene = new Scene(root, 850, 550);
         stage.setTitle("Modify Customer");
         stage.setScene(scene);
         stage.show();
