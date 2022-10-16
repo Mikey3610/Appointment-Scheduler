@@ -21,11 +21,7 @@ import java.util.ResourceBundle;
 
 public class MainAppointmentScreen implements Initializable {
 
-    public Label ApptOrCust;
-    public Button AddApptOrCust;
-    public Button ModifyApptOrCust;
-    public Button DeleteApptOrCust;
-    public ToggleGroup tGroupCustOrAppt;
+    public ToggleGroup tGroupAppts;
     public TableView <Appointments> appointmentsTable;
     public TableColumn appointmentIdCol;
     public TableColumn titleCol;
