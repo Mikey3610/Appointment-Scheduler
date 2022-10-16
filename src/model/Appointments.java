@@ -1,5 +1,8 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Timestamp;
 
 public class Appointments {
@@ -7,19 +10,19 @@ public class Appointments {
     private String title;
     private String description;
     private String location;
-    private int contact;
+    private int contactId;
     private String type;
     private Timestamp startDateTime;
     private Timestamp endDateTime;
     private int customerId;
     private int userId;
 
-    public Appointments(int appointmentId, String title, String description, String location, int contact, String type, Timestamp startDateTime, Timestamp endDateTime, int customerId, int userId) {
+    public Appointments(int appointmentId, String title, String description, String location, int contactId, String type, Timestamp startDateTime, Timestamp endDateTime, int customerId, int userId) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
         this.location = location;
-        this.contact = contact;
+        this.contactId = contactId;
         this.type = type;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
@@ -59,12 +62,12 @@ public class Appointments {
         this.location = location;
     }
 
-    public int getContact() {
-        return contact;
+    public int getContactId() {
+        return contactId;
     }
 
-    public void setContact(int contact) {
-        this.contact = contact;
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
     }
 
     public String getType() {

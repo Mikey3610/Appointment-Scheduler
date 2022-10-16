@@ -32,6 +32,7 @@ public class CustomerScreen implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             customerTable.setItems(CustomersDAO.selectAllCustomers());
+
             customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
             addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -68,8 +69,8 @@ public class CustomerScreen implements Initializable {
 
     public void onBacktoAppts(ActionEvent actionEvent) throws IOException {
         Alert cancellation = new Alert(Alert.AlertType.CONFIRMATION);
-        cancellation.setTitle("Confirm Cancellation");
-        cancellation.setContentText("Discard changes and return to Appointments Screen?");
+        cancellation.setTitle("Go back to Appointments Screen");
+        cancellation.setContentText("Go back to Appointments Screen?");
         Optional<ButtonType> result = cancellation.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
