@@ -1,6 +1,7 @@
 package controller;
 
 import DBAccess.CustomersDAO;
+import DBAccess.DBCountries;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,7 +37,7 @@ public class CustomerScreen implements Initializable {
             addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
             postalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
             phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-            countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+            countryCol.setCellValueFactory(new PropertyValueFactory<>("countryId"));
             divisionIdCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -45,7 +45,7 @@ public abstract class CustomersDAO {
     }
 
     public static ObservableList<Customers> selectAllCustomers() throws SQLException {
-        String sql = "SELECT * FROM CUSTOMERS";
+        String sql = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, customers.Division_ID, Country_ID FROM customers, first_level_divisions WHERE customers.Division_ID = first_level_divisions.Division_ID;";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
@@ -56,8 +56,9 @@ public abstract class CustomersDAO {
             String postalCode = rs.getString("Postal_Code");
             String phone = rs.getString("Phone");
             int divisionId = rs.getInt("Division_ID");
+            int countryId = rs.getInt("Country_ID");
 
-            Customers customers = new Customers(customerId, customerName, address, postalCode, phone, divisionId);
+            Customers customers = new Customers(customerId, customerName, address, postalCode, phone, divisionId, countryId);
             allCustomers.add(customers);
 
         }
@@ -65,7 +66,7 @@ public abstract class CustomersDAO {
     }
 
     public static Customers selectCustomer(int customerId) throws SQLException {
-        String sql = "SELECT * FROM CUSTOMERS WHERE Customer_ID = ?";
+        String sql = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, customers.Division_ID, Country_ID FROM customers, first_level_divisions WHERE customers.Division_ID = first_level_divisions.Division_ID AND Customer_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.setInt(1, customerId);
         ResultSet rs = ps.executeQuery();
@@ -75,8 +76,9 @@ public abstract class CustomersDAO {
             String address = rs.getString("Address");
             String postalCode = rs.getString("Postal_Code");
             int divisionId = rs.getInt("Division_ID");
+            int countryId = rs.getInt("Country_ID");
 
-            Customers customer = new Customers(customerId, customerName, phone, address, postalCode, divisionId);
+            Customers customer = new Customers(customerId, customerName, phone, address, postalCode, divisionId, countryId);
             return customer;
         }
         return null;
