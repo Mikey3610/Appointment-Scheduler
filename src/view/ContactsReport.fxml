@@ -16,10 +16,16 @@
             </Label>
             <TableView layoutX="24.0" layoutY="76.0" prefHeight="311.0" prefWidth="613.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn prefWidth="111.0" text="Appointment ID" />
+                <TableColumn prefWidth="53.0" text="Title" />
+                  <TableColumn prefWidth="50.0" text="Type" />
+                  <TableColumn prefWidth="94.0" text="Description" />
+                  <TableColumn prefWidth="114.0" text="Start Date &amp; Time" />
+                  <TableColumn prefWidth="110.0" text="End Date &amp; Time" />
+                  <TableColumn text="Customer ID" />
               </columns>
             </TableView>
+            <ComboBox layoutX="202.0" layoutY="38.0" prefWidth="150.0" promptText="Select Contact" />
          </children>
       </AnchorPane>
    </children>

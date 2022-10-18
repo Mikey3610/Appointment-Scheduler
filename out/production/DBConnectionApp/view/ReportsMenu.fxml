@@ -15,7 +15,7 @@
             </Label>
             <Button fx:id="TotalCustAppts" layoutX="81.0" layoutY="98.0" mnemonicParsing="false" onAction="#onTotalCustAppts" text="Total Number of Customer Appointments" />
             <Button fx:id="ContactSchedule" layoutX="81.0" layoutY="162.0" mnemonicParsing="false" onAction="#onContactSchedule" text="Contact Schedule" />
-            <Button layoutX="81.0" layoutY="225.0" mnemonicParsing="false" text="TBD" />
+            <Button fx:id="CustIdReport" layoutX="81.0" layoutY="225.0" mnemonicParsing="false" onAction="#onCustIdReport" text="Reports by Customer ID" />
             <Button fx:id="BackBtn" layoutX="381.0" layoutY="300.0" mnemonicParsing="false" onAction="#onBack" text="Back" />
          </children>
       </AnchorPane>

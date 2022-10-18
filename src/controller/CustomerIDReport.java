@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CustomerApptsReport implements Initializable {
+public class CustomerIDReport implements Initializable {
     public void onBackToReportsMenu(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportsMenu.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

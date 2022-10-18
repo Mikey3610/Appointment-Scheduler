@@ -49,4 +49,13 @@ public class ReportsMenu {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void onCustIdReport(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerIDReport.fxml"));
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 850, 600);
+        stage.setTitle("Reports by Customer ID");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
