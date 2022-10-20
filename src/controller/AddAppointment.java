@@ -1,5 +1,6 @@
 package controller;
 
+import DBAccess.AppointmentsDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +17,8 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -44,11 +47,6 @@ public class AddAppointment implements Initializable {
 
     public void onSaveAppt(ActionEvent actionEvent) {
         try {
-         /*   double price = Double.parseDouble(addPartPriceText.getText());
-            int stock = Integer.parseInt(addPartInvText.getText());
-            int min = Integer.parseInt(addPartMinText.getText());
-            int max = Integer.parseInt(addPartMaxText.getText());
-          */
 
         } catch(Exception e) {
                 e.printStackTrace();

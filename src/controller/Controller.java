@@ -1,6 +1,6 @@
 package controller;
 
-import DBAccess.DBCountries;
+import DBAccess.CountriesDAO;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -20,9 +20,9 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
         public void showMe(ActionEvent actionEvent){
-            ObservableList<Countries> countrylist = DBCountries.getAllCountries();
+            ObservableList<Countries> countrylist = CountriesDAO.getAllCountries();
             for(Countries C : countrylist){
-                System.out.println("Country Id : " + C.getId() + " Name : " + C.getName());
+                System.out.println("Country Id : " + C.getCountryId() + " Name : " + C.getCountryName());
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.company;
 
-import DBAccess.DBCountries;
+import DBAccess.CountriesDAO;
 import helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         JDBC.openConnection();
-        DBCountries.checkDateConversion();
+        CountriesDAO.checkDateConversion();
         launch(args);
         JDBC.closeConnection();
     }
