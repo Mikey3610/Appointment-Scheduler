@@ -45,4 +45,9 @@ public class Customers {
 
     public int getCountryId() {return countryId;
     }
+
+    @Override
+    public String toString() {
+        return(getCustomerName());
+    }
 }

@@ -11,4 +11,9 @@ public class Countries {
     public int getCountryId(){return countryId;}
 
     public String getCountryName(){return countryName;}
+
+    @Override
+    public String toString() {
+        return(getCountryName());
+    }
 }

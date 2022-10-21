@@ -36,8 +36,8 @@
                   <Label text="Postal Code" GridPane.rowIndex="3" />
                   <Label text="Phone Number" GridPane.rowIndex="4" />
                   <Label text="Country" GridPane.rowIndex="5" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="CountryCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="DivisionCombo" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                   <Label text="Division" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="10.0" />
@@ -45,11 +45,11 @@
                      <padding>
                         <Insets left="10.0" />
                      </padding></Label>
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="CustIDCombo" editable="false" promptText="Customer ID Auto-generated" GridPane.columnIndex="1" />
+                  <TextField fx:id="CustNameText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="AddressText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="PostalCodeText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="PhoneNumberText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
             <Button fx:id="CancelCustomer" layoutX="660.0" layoutY="421.0" mnemonicParsing="false" onAction="#onCancelCust" text="Cancel" />
