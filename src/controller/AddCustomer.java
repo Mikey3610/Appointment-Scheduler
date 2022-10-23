@@ -3,6 +3,7 @@ package controller;
 import DBAccess.CountriesDAO;
 import DBAccess.CustomersDAO;
 import DBAccess.DivisionsDAO;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,21 +51,48 @@ public class AddCustomer implements Initializable {
     }
 
     public void onSaveCust(ActionEvent actionEvent) throws SQLException, IOException {
-        String customer = CustNameText.getText();
-        String address = AddressText.getText();
-        String postalCode = PostalCodeText.getText();
-        String phone = PhoneNumberText.getText();
-        Countries country = CountryCombo.getValue();
-        Divisions division = DivisionCombo.getValue();
+        try {
+            String customer = CustNameText.getText();
+            String address = AddressText.getText();
+            String postalCode = PostalCodeText.getText();
+            String phone = PhoneNumberText.getText();
+            Countries country = CountryCombo.getValue();
+            Divisions division = DivisionCombo.getValue();
 
-        CustomersDAO.insertCustomer(CustNameText.getText(), AddressText.getText(), PostalCodeText.getText(), PhoneNumberText.getText(), DivisionCombo.getValue().getDivisionId());
 
-        Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 850, 600);
-        stage.setTitle("Customers");
-        stage.setScene(scene);
-        stage.show();
+            if (customer.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Customer name is empty. Please input a name.");
+                alert.showAndWait();
+            } else if (address.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Address is empty. Please input an address.");
+                alert.showAndWait();
+            } else if (postalCode.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Postal Code is empty. Please input a postal code.");
+                alert.showAndWait();
+            } else if (phone.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Phone number is empty. Please input a phone number.");
+                alert.showAndWait();
+            } else if (country == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Country has not been selected. Please select a country");
+                alert.showAndWait();
+            } else if (division == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Division has not been selected. Please select a division.");
+                alert.showAndWait();
+            }
+
+            CustomersDAO.insertCustomer(CustNameText.getText(), AddressText.getText(), PostalCodeText.getText(), PhoneNumberText.getText(),
+                    DivisionCombo.getValue().getDivisionId());
+
+            Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 850, 600);
+            stage.setTitle("Customers");
+            stage.setScene(scene);
+            stage.show();
+        } catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Form contains invalid input values or blanks. Please check and input proper values.");
+            alert.showAndWait();
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package controller;
 
 import DBAccess.AppointmentsDAO;
+import DBAccess.CustomersDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,9 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Contacts;
-import model.Customers;
-import model.User;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,9 +46,56 @@ public class AddAppointment implements Initializable {
 
     public void onSaveAppt(ActionEvent actionEvent) {
         try {
+            String title = TitleText.getText();
+            String description = DescriptionText.getText();
+            String location = LocationText.getText();
+            String type = TypeText.getText();
+            //StartTimeCombo.getValue();
+            //EndTimeCombo.getValue();
+            StartDateDatePicker.getValue();
+            EndDateDatePicker.getValue();
+            Contacts contact = ContactCombo.getValue();
+            Customers customer = CustIdCombo.getValue();
+            User user = UserIdCombo.getValue();
 
+
+            if (title.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Title is empty. Please input a title.");
+                alert.showAndWait();
+            } else if (description.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Description is empty. Please input a description.");
+                alert.showAndWait();
+            } else if (location.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Location is empty. Please input a location.");
+                alert.showAndWait();
+            } else if (type.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment type is empty. Please input a type.");
+                alert.showAndWait();
+            } else if (contact == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Contact has not been selected. Please select a contact");
+                alert.showAndWait();
+            } else if (customer == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Customer ID has not been selected. Please select a customer ID.");
+                alert.showAndWait();
+            } else if (user == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "User ID has not been selected. Please select a user ID.");
+                alert.showAndWait();
+            }
+
+            /*
+            AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getUserId(), TitleText.getText(), DescriptionText.getText(),
+                    LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), StartDateDatePicker.getValue(), EndDateDatePicker.getValue(), CustIdCombo.getValue().getCustomerId());
+             */
+
+            Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 850, 600);
+            stage.setTitle("Appointment Screen");
+            stage.setScene(scene);
+            stage.show();
         } catch(Exception e) {
-                e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Form contains invalid input values or blanks. Please check and input proper values.");
+            alert.showAndWait();
         }
     }
 

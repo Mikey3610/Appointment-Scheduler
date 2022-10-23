@@ -45,7 +45,7 @@
                      <padding>
                         <Insets left="10.0" />
                      </padding></Label>
-                  <TextField fx:id="CustIDCombo" editable="false" GridPane.columnIndex="1" />
+                  <TextField fx:id="CustIDCombo" editable="false" promptText="Customer ID Auto-generated" GridPane.columnIndex="1" />
                   <TextField fx:id="CustNameText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="AddressText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="PostalCodeText" GridPane.columnIndex="1" GridPane.rowIndex="3" />

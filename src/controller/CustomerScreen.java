@@ -63,7 +63,26 @@ public class CustomerScreen implements Initializable {
         stage.show();
     }
 
-    public void onDeleteCust(ActionEvent actionEvent) {
+    public void onDeleteCust(ActionEvent actionEvent) throws SQLException {
+        Customers selectedCust = customerTable.getSelectionModel().getSelectedItem();
+
+        if (selectedCust == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("No customer selected.");
+            alert.showAndWait();
+        } else {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Customer");
+            alert.setContentText("Would you like to delete this customer?");
+            Optional<ButtonType> confirmation = alert.showAndWait();
+
+            if (confirmation.get() == ButtonType.OK) {
+                CustomersDAO.deleteCustomer(selectedCust.getCustomerId());
+                customerTable.setItems(CustomersDAO.selectAllCustomers());
+
+            }
+        }
     }
 
     public void onBacktoAppts(ActionEvent actionEvent) throws IOException {
