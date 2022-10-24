@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 public class AddCustomer implements Initializable {
 
-    public TextField CustIDCombo;
+    public TextField CustIDText;
     public TextField CustNameText;
     public TextField AddressText;
     public TextField PostalCodeText;

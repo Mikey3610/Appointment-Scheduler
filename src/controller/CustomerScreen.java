@@ -26,6 +26,7 @@ public class CustomerScreen implements Initializable {
     public TableColumn phoneNumberCol;
     public TableColumn countryCol;
     public TableColumn divisionIdCol;
+    public static Customers customerToModify;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,14 +54,26 @@ public class CustomerScreen implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    public static Customers customerToModify() {
+        return customerToModify;
+    }
 
     public void onModifyCust(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyCustomer.fxml"));
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 850, 550);
-        stage.setTitle("Modify Customer");
-        stage.setScene(scene);
-        stage.show();
+        customerToModify = customerTable.getSelectionModel().getSelectedItem();
+
+        if (customerToModify == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "No customers selected.");
+            alert.showAndWait();
+        } else {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyCustomer.fxml"));
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 850, 550);
+            stage.setTitle("Modify Customer");
+            stage.setScene(scene);
+            stage.show();
+        }
+
+
     }
 
     public void onDeleteCust(ActionEvent actionEvent) throws SQLException {
@@ -74,7 +87,7 @@ public class CustomerScreen implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Customer");
-            alert.setContentText("Would you like to delete this customer?");
+            alert.setContentText("Are you sure you want to delete this customer?");
             Optional<ButtonType> confirmation = alert.showAndWait();
 
             if (confirmation.get() == ButtonType.OK) {
