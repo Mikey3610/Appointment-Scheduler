@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DivisionsDAO {
+public abstract class DivisionsDAO {
     public static ObservableList<Divisions> getDivisionByCountry(int countryId){
         ObservableList<Divisions> divisions = FXCollections.observableArrayList();
 

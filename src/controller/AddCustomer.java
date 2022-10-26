@@ -95,6 +95,12 @@ public class AddCustomer implements Initializable {
         }
     }
 
+    public void onCountryCombo(ActionEvent actionEvent) {
+        int countryId = CountryCombo.getValue().getCountryId();
+        ObservableList<Divisions> list = DivisionsDAO.getDivisionByCountry(countryId);
+        DivisionCombo.setItems(DivisionsDAO.getDivisionByCountry(countryId));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CountryCombo.setPromptText("Select Country...");
