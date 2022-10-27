@@ -81,8 +81,7 @@ public class ModifyCustomer implements Initializable {
                 alert.showAndWait();
             }
 
-            CustomersDAO.updateCustomer(Integer.parseInt(CustIDText.getText()
-            ), CustNameText.getText(), AddressText.getText(), PostalCodeText.getText(), PhoneNumberText.getText(), DivisionCombo.getValue().getDivisionId());
+            CustomersDAO.updateCustomer(selectedCustomer.getCustomerId(), CustNameText.getText(), AddressText.getText(), PostalCodeText.getText(), PhoneNumberText.getText(), DivisionCombo.getValue().getDivisionId());
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -107,7 +106,7 @@ public class ModifyCustomer implements Initializable {
         selectedCustomer = CustomerScreen.customerToModify();
 
         try {
-            CustNameText.setText(String.valueOf(selectedCustomer.getCustomerId()));
+            CustIDText.setText(String.valueOf(selectedCustomer.getCustomerId()));
             AddressText.setText(selectedCustomer.getAddress());
             PostalCodeText.setText(String.valueOf(selectedCustomer.getPostalCode()));
             PhoneNumberText.setText(String.valueOf(selectedCustomer.getPhone()));

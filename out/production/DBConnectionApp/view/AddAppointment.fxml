@@ -33,7 +33,7 @@
                   <TextField fx:id="DescriptionText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="TypeText" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <Label text="Appointment ID" />
-                  <TextField fx:id="ApptIdText" editable="false" GridPane.columnIndex="1" />
+                  <TextField fx:id="ApptIdText" editable="false" promptText="ID Auto-generated" GridPane.columnIndex="1" />
                   <Label text="Start Time" GridPane.rowIndex="5" />
                   <Label text="End Time" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <GridPane.margin>
