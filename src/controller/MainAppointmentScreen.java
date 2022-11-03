@@ -85,7 +85,7 @@ public class MainAppointmentScreen implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 750, 500);
-        stage.setTitle("Add Customer");
+        stage.setTitle("Add Appointment");
         stage.setScene(scene);
         stage.show();
     }

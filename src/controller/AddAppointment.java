@@ -1,7 +1,9 @@
 package controller;
 
 import DBAccess.AppointmentsDAO;
+import DBAccess.ContactsDAO;
 import DBAccess.CustomersDAO;
+import DBAccess.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +18,7 @@ import model.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -40,6 +43,35 @@ public class AddAppointment implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //StartTimeCombo.setPromptText("Select a start time...");
+        //EndTimeCombo.setPromptText("Select an ending time...");
+        ContactCombo.setPromptText("Contact ID...");
+        CustIdCombo.setPromptText("Customer ID...");
+        UserIdCombo.setPromptText("User ID...");
+
+        try {
+            ContactCombo.setItems(ContactsDAO.selectAllContacts());
+            CustIdCombo.setItems(CustomersDAO.selectAllCustomers());
+            UserIdCombo.setItems(UserDAO.selectAllUsers());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        LocalTime start = LocalTime.of(8, 0);
+        LocalTime end = LocalTime.of(20, 0);
+
+        while(start.isBefore(end.plusSeconds(1))){
+            StartTimeCombo.getItems().add(start);
+            start = start.plusMinutes(1);
+        }
+        StartTimeCombo.getSelectionModel().select(LocalTime.of(8, 0));
+
+        while(end.isAfter(start.plusSeconds(1))){
+            EndTimeCombo.getItems().add(end);
+            end = end.plusMinutes(1);
+        }
+        EndTimeCombo.getSelectionModel().select(LocalTime.of(8, 0));
 
     }
 
@@ -85,6 +117,7 @@ public class AddAppointment implements Initializable {
             /*
             AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getUserId(), TitleText.getText(), DescriptionText.getText(),
                     LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), StartDateDatePicker.getValue(), EndDateDatePicker.getValue(), CustIdCombo.getValue().getCustomerId());
+
              */
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
