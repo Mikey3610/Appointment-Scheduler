@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Timestamp;
+import java.time.LocalTime;
 
 public class Appointments {
     private int appointmentId;
@@ -109,6 +110,8 @@ public class Appointments {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+
 
     @Override
     public String toString() {
