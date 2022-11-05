@@ -12,19 +12,21 @@ import java.sql.Timestamp;
 
 public abstract class AppointmentsDAO {
 
-    public static int insertAppointment(int userId, String title, String description, String location, int contactId, String type, Timestamp start, Timestamp end, int customerId) throws SQLException {
-        String sql = "INSERT INTO APPOINTMENTS (User_ID, Title, Description, Location, Contact_ID, Type, Start, End, Customer_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static int insertAppointment(int userId, String title, String description, String location, int contactId, String type, Timestamp start, Timestamp end, int customerId, int appointmentId) throws SQLException {
+        String sql = "INSERT INTO APPOINTMENTS (User_ID, Title, Description, Location, Contact_ID, Type, Start, End, Customer_ID, Appointment_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
 
-        ps.setString(1, title);
-        ps.setString(2, description);
-        ps.setString(3, location);
-        ps.setString(4, type);
-        ps.setTimestamp(5, start);
-        ps.setTimestamp(6, end);
-        ps.setInt(7, customerId);
-        ps.setInt(8, userId);
-        ps.setInt(9, contactId);
+        ps.setInt(1, userId);
+        ps.setString(2, title);
+        ps.setString(3, description);
+        ps.setString(4, location);
+        ps.setInt(5, contactId);
+        ps.setString(6, type);
+        ps.setTimestamp(7, start);
+        ps.setTimestamp(8, end);
+        ps.setInt(9, customerId);
+        //ps.setInt(10, appointmentId);
+
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
     }

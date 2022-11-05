@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -58,20 +59,22 @@ public class AddAppointment implements Initializable {
         }
 
 
+        //ZonedDateTime;
         LocalTime start = LocalTime.of(8, 0);
         LocalTime end = LocalTime.of(20, 0);
 
         while(start.isBefore(end.plusSeconds(1))){
             StartTimeCombo.getItems().add(start);
-            start = start.plusMinutes(1);
+            start = start.plusMinutes(15);
+            end = start.plusMinutes(15);
+            EndTimeCombo.getItems().add(end);
+            //create an end time that is less than 10pm EST based off of the ZonedDateTime
         }
         StartTimeCombo.getSelectionModel().select(LocalTime.of(8, 0));
-
-        while(end.isAfter(start.plusSeconds(1))){
-            EndTimeCombo.getItems().add(end);
-            end = end.plusMinutes(1);
-        }
         EndTimeCombo.getSelectionModel().select(LocalTime.of(8, 0));
+        //add a validation for end time being after the start time
+
+
 
     }
 
@@ -82,12 +85,12 @@ public class AddAppointment implements Initializable {
             String description = DescriptionText.getText();
             String location = LocationText.getText();
             String type = TypeText.getText();
-            //StartTimeCombo.getValue();
-            //EndTimeCombo.getValue();
+            StartTimeCombo.getValue();
+            EndTimeCombo.getValue();
             StartDateDatePicker.getValue();
             EndDateDatePicker.getValue();
             Contacts contact = ContactCombo.getValue();
-            Customers customer = CustIdCombo.getValue();
+            Customers customerId = CustIdCombo.getValue();
             User user = UserIdCombo.getValue();
 
 
@@ -106,7 +109,7 @@ public class AddAppointment implements Initializable {
             } else if (contact == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Contact has not been selected. Please select a contact");
                 alert.showAndWait();
-            } else if (customer == null) {
+            } else if (customerId == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Customer ID has not been selected. Please select a customer ID.");
                 alert.showAndWait();
             } else if (user == null) {
@@ -114,11 +117,13 @@ public class AddAppointment implements Initializable {
                 alert.showAndWait();
             }
 
+
             /*
             AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getUserId(), TitleText.getText(), DescriptionText.getText(),
                     LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), StartDateDatePicker.getValue(), EndDateDatePicker.getValue(), CustIdCombo.getValue().getCustomerId());
 
              */
+
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

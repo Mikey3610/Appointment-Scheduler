@@ -16,6 +16,8 @@ import model.Customers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -49,6 +51,8 @@ public class MainAppointmentScreen implements Initializable {
             endDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
             customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+
+            //AppointmentsDAO.insertAppointment(1, "test", "test","place",1,"test", Timestamp.valueOf(LocalDateTime.now()),Timestamp.valueOf(LocalDateTime.now().plusMinutes(15)), 1, 0);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
