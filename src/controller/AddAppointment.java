@@ -82,7 +82,6 @@ public class AddAppointment implements Initializable {
 
     }
 
-
     public static ObservableList<LocalTime> apptTimesList() {
         ObservableList<LocalTime> times = FXCollections.observableArrayList();
         LocalTime start = LocalTime.of(8, 00);
@@ -90,7 +89,6 @@ public class AddAppointment implements Initializable {
         while (start.isBefore(end.plusSeconds(1))) {
             times.add(start);
             start = start.plusMinutes(15);
-
         }
         return times;
     }
@@ -99,26 +97,50 @@ public class AddAppointment implements Initializable {
 
         try {
 
-
-            //
+            /*
             Timestamp ts = Timestamp.valueOf(LocalDateTime.now());
             LocalDateTime ldt = ts.toLocalDateTime();
             ZonedDateTime zdt = ldt.atZone(ZoneId.of(String.valueOf(ZoneId.systemDefault())));
             ZonedDateTime estzdt = zdt.withZoneSameInstant(ZoneId.of("America/New York"));
             LocalDateTime ldtIn = estzdt.toLocalDateTime();
+             */
+
+            LocalDateTime start = LocalDateTime.of(StartDateDatePicker.getValue(), StartTimeCombo.getValue());
+            LocalDateTime end = LocalDateTime.of(StartDateDatePicker.getValue(), EndTimeCombo.getValue());
+
+            ZoneId zid = ZoneId.systemDefault();
+            ZonedDateTime zStartTime = start.atZone(zid);
+            ZonedDateTime zendTime = end.atZone(zid);
+            ZonedDateTime eastZoneTime = zStartTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+            ZonedDateTime eastEndZoneTime = zendTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+            ZonedDateTime startBusinessHours = ZonedDateTime.of(start.toLocalDate(), LocalTime.of(8,0), ZoneId.of("America/New_York"));
+            ZonedDateTime endBusinessHours = startBusinessHours.plusHours(14);
+
+            // DatePicker will give you a "LocalDate" and combo box gives a localtime object
+            //LocalDate - datepicker
+            //LocalTime - combobox
+            //LocalDateTime (above 2 combined)
+            //Combine Datepicker (LocalDate) and Comboboxes (LocalTimes) into LocalDateTime
 
             String title = TitleText.getText();
             String description = DescriptionText.getText();
             String location = LocationText.getText();
             String type = TypeText.getText();
+
+            /*
             StartTimeCombo.getValue();
             EndTimeCombo.getValue();
             StartDateDatePicker.getValue();
             EndDateDatePicker.getValue();
+            */
             Contacts contact = ContactCombo.getValue();
             Customers customerId = CustIdCombo.getValue();
             User user = UserIdCombo.getValue();
 
+
+
+            Timestamp startTS = Timestamp.valueOf(start);
+            Timestamp endTS = Timestamp.valueOf(end);
 
             if (title.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Title is empty. Please input a title.");
@@ -144,14 +166,10 @@ public class AddAppointment implements Initializable {
             }
 
 
-            /*
-            Timestamp startDate = Timestamp.valueOf(LocalDateTime.of(StartDateDatePicker.getValue(), StartTimeCombo.getValue()));
-            Timestamp endDate = Timestamp.valueOf(LocalDateTime.of(StartDateDatePicker.getValue(), EndTimeCombo.getValue()));
-
 
             AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getUserId(), TitleText.getText(), DescriptionText.getText(),
-                    LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), startDate, endDate, CustIdCombo.getValue().getCustomerId());
-             */
+                    LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), startTS, endTS, CustIdCombo.getValue().getCustomerId(), 0);
+
 
 
 
@@ -163,8 +181,9 @@ public class AddAppointment implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch(Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Form contains invalid input values or blanks. Please check and input proper values.");
-            alert.showAndWait();
+            //Alert alert = new Alert(Alert.AlertType.ERROR, "Form contains invalid input values or blanks. Please check and input proper values.");
+            //alert.showAndWait();
+            e.printStackTrace();
         }
 
 

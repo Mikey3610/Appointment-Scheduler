@@ -12,8 +12,8 @@ import java.sql.Timestamp;
 
 public abstract class AppointmentsDAO {
 
-    public static int insertAppointment(int userId, String title, String description, String location, int contactId, String type, Timestamp start, Timestamp end, int customerId) throws SQLException {
-        String sql = "INSERT INTO APPOINTMENTS (User_ID, Title, Description, Location, Contact_ID, Type, Start, End, Customer_ID, Appointment_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static int insertAppointment(int userId, String title, String description, String location, int contactId, String type, Timestamp start, Timestamp end, int customerId, int Appointment_ID) throws SQLException {
+        String sql = "INSERT INTO APPOINTMENTS (User_ID, Title, Description, Location, Contact_ID, Type, Start, End, Customer_ID, Appointment_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
 
         ps.setInt(1, userId);
