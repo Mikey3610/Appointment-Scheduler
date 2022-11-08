@@ -63,21 +63,27 @@ public class AddCustomer implements Initializable {
             if (customer.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Customer name is empty. Please input a name.");
                 alert.showAndWait();
+                return;
             } else if (address.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Address is empty. Please input an address.");
                 alert.showAndWait();
+                return;
             } else if (postalCode.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Postal Code is empty. Please input a postal code.");
                 alert.showAndWait();
+                return;
             } else if (phone.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Phone number is empty. Please input a phone number.");
                 alert.showAndWait();
+                return;
             } else if (country == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Country has not been selected. Please select a country");
                 alert.showAndWait();
+                return;
             } else if (division == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Division has not been selected. Please select a division.");
                 alert.showAndWait();
+                return;
             }
 
             CustomersDAO.insertCustomer(CustNameText.getText(), AddressText.getText(), PostalCodeText.getText(), PhoneNumberText.getText(),

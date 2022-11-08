@@ -142,24 +142,31 @@ public class AddAppointment implements Initializable {
             if (title.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Title is empty. Please input a title.");
                 alert.showAndWait();
+                return;
             } else if (description.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Description is empty. Please input a description.");
                 alert.showAndWait();
+                return;
             } else if (location.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Location is empty. Please input a location.");
                 alert.showAndWait();
+                return;
             } else if (type.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment type is empty. Please input a type.");
                 alert.showAndWait();
+                return;
             } else if (contact == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Contact has not been selected. Please select a contact");
                 alert.showAndWait();
+                return;
             } else if (customerId == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Customer ID has not been selected. Please select a customer ID.");
                 alert.showAndWait();
+                return;
             } else if (user == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "User ID has not been selected. Please select a user ID.");
                 alert.showAndWait();
+                return;
             }
 
             AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getUserId(), TitleText.getText(), DescriptionText.getText(),
