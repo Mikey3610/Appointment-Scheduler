@@ -126,18 +126,15 @@ public class AddAppointment implements Initializable {
             String description = DescriptionText.getText();
             String location = LocationText.getText();
             String type = TypeText.getText();
-
+            Contacts contact = ContactCombo.getValue();
+            Customers customerId = CustIdCombo.getValue();
+            User user = UserIdCombo.getValue();
             /*
             StartTimeCombo.getValue();
             EndTimeCombo.getValue();
             StartDateDatePicker.getValue();
             EndDateDatePicker.getValue();
             */
-            Contacts contact = ContactCombo.getValue();
-            Customers customerId = CustIdCombo.getValue();
-            User user = UserIdCombo.getValue();
-
-
 
             Timestamp startTS = Timestamp.valueOf(start);
             Timestamp endTS = Timestamp.valueOf(end);
@@ -165,14 +162,8 @@ public class AddAppointment implements Initializable {
                 alert.showAndWait();
             }
 
-
-
             AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getUserId(), TitleText.getText(), DescriptionText.getText(),
                     LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), startTS, endTS, CustIdCombo.getValue().getCustomerId(), 0);
-
-
-
-
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -181,9 +172,9 @@ public class AddAppointment implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch(Exception e) {
-            //Alert alert = new Alert(Alert.AlertType.ERROR, "Form contains invalid input values or blanks. Please check and input proper values.");
-            //alert.showAndWait();
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Form contains invalid input values or blanks. Please check and input proper values.");
+            alert.showAndWait();
+            //e.printStackTrace();
         }
 
 
