@@ -169,6 +169,17 @@ public class AddAppointment implements Initializable {
                 return;
             }
 
+            if (StartTimeCombo.getValue().isAfter(EndTimeCombo.getValue())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Start time must be before end time.");
+                alert.showAndWait();
+                return;
+            }
+            if (StartDateDatePicker.getValue().isAfter(EndDateDatePicker.getValue())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Start date must be before end date.");
+                alert.showAndWait();
+                return;
+            }
+
             AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getUserId(), TitleText.getText(), DescriptionText.getText(),
                     LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), startTS, endTS, CustIdCombo.getValue().getCustomerId(), 0);
 

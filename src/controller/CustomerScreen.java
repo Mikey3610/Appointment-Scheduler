@@ -84,7 +84,6 @@ public class CustomerScreen implements Initializable {
             alert.setContentText("No customer selected.");
             alert.showAndWait();
         } else {
-
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Customer");
             alert.setContentText("Are you sure you want to delete this customer?");
@@ -93,7 +92,6 @@ public class CustomerScreen implements Initializable {
             if (confirmation.get() == ButtonType.OK) {
                 CustomersDAO.deleteCustomer(selectedCust.getCustomerId());
                 customerTable.setItems(CustomersDAO.selectAllCustomers());
-
             }
         }
     }

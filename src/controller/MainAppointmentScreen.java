@@ -103,7 +103,27 @@ public class MainAppointmentScreen implements Initializable {
         stage.show();
     }
 
-    public void onDeleteAppt(ActionEvent actionEvent) {
+    public void onDeleteAppt(ActionEvent actionEvent) throws SQLException {
+        Appointments selectedAppt = appointmentsTable.getSelectionModel().getSelectedItem();
+        int appointmentId = selectedAppt.getAppointmentId();
+        String appointmentType = selectedAppt.getType();
+
+        if (selectedAppt == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("No appointment selected.");
+            alert.showAndWait();
+        } else {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Appointment");
+            alert.setContentText("Are you sure you want to delete this appointment?" + " Appointment ID: " + appointmentId + "\nType: " + appointmentType);
+            Optional<ButtonType> confirmation = alert.showAndWait();
+
+            if (confirmation.get() == ButtonType.OK) {
+                AppointmentsDAO.deleteAppointment(selectedAppt.getAppointmentId());
+                appointmentsTable.setItems(AppointmentsDAO.selectAllAppointments());
+            }
+        }
     }
 
 
