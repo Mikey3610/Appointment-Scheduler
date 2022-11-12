@@ -69,16 +69,16 @@ public class MainAppointmentScreen implements Initializable {
         }
     }
 
-    public void onViewWeek(ActionEvent actionEvent) {
-
+    public void onViewWeek(ActionEvent actionEvent) throws SQLException {
+        appointmentsTable.setItems(AppointmentsDAO.getAppointmentsByWeek());
     }
 
-    public void onViewMonth(ActionEvent actionEvent) {
-
+    public void onViewMonth(ActionEvent actionEvent) throws SQLException {
+        appointmentsTable.setItems(AppointmentsDAO.getAppointmentsByMonth());
     }
 
-    public void onViewAll(ActionEvent actionEvent) {
-
+    public void onViewAll(ActionEvent actionEvent) throws SQLException {
+        appointmentsTable.setItems(AppointmentsDAO.selectAllAppointments());
     }
 
     public void onViewCust(ActionEvent actionEvent) {

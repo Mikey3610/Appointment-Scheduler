@@ -84,8 +84,8 @@ public class AddAppointment implements Initializable {
 
     public static ObservableList<LocalTime> apptTimesList() {
         ObservableList<LocalTime> times = FXCollections.observableArrayList();
-        LocalTime start = LocalTime.of(8, 00);
-        LocalTime end = LocalTime.of(20,00);
+        LocalTime start = LocalTime.of(1, 00);
+        LocalTime end = LocalTime.of(23,00);
         while (start.isBefore(end.plusSeconds(1))) {
             times.add(start);
             start = start.plusMinutes(15);
@@ -111,10 +111,18 @@ public class AddAppointment implements Initializable {
             ZoneId zid = ZoneId.systemDefault();
             ZonedDateTime zStartTime = start.atZone(zid);
             ZonedDateTime zendTime = end.atZone(zid);
-            ZonedDateTime eastZoneTime = zStartTime.withZoneSameInstant(ZoneId.of("America/New_York"));
-            ZonedDateTime eastEndZoneTime = zendTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+
+            ZonedDateTime ESTStartZoneTime = zStartTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+            ZonedDateTime ESTEndZoneTime = zendTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+
             ZonedDateTime startBusinessHours = ZonedDateTime.of(start.toLocalDate(), LocalTime.of(8,0), ZoneId.of("America/New_York"));
             ZonedDateTime endBusinessHours = startBusinessHours.plusHours(14);
+
+            if (ESTStartZoneTime.isBefore(startBusinessHours) || ESTEndZoneTime.isAfter(endBusinessHours)){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please choose a time between 8am - 10pm EST for the appointment.");
+                alert.showAndWait();
+                return;
+            }
 
             // DatePicker will give you a "LocalDate" and combo box gives a localtime object
             //LocalDate - datepicker
