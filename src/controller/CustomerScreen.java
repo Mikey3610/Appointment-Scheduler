@@ -72,8 +72,6 @@ public class CustomerScreen implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
-
-
     }
 
     public void onDeleteCust(ActionEvent actionEvent) throws SQLException {

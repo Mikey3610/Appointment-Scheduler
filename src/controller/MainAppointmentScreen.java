@@ -35,6 +35,7 @@ public class MainAppointmentScreen implements Initializable {
     public TableColumn endDateTimeCol;
     public TableColumn customerIdCol;
     public TableColumn userIdCol;
+    public static Appointments appointmentToModify;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -94,13 +95,24 @@ public class MainAppointmentScreen implements Initializable {
         stage.show();
     }
 
+    public static Appointments appointmentToModify() {
+        return appointmentToModify;
+    }
+
     public void onModifyAppt(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyAppointment.fxml"));
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 900, 550);
-        stage.setTitle("Modify Appointment");
-        stage.setScene(scene);
-        stage.show();
+        appointmentToModify = appointmentsTable.getSelectionModel().getSelectedItem();
+
+        if (appointmentToModify == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "No appointments selected.");
+            alert.showAndWait();
+        } else {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/ModifyAppointment.fxml"));
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 900, 550);
+            stage.setTitle("Modify Appointment");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public void onDeleteAppt(ActionEvent actionEvent) throws SQLException {

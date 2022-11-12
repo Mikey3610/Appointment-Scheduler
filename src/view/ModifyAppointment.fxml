@@ -31,11 +31,11 @@
                   <Label text="Description" GridPane.rowIndex="2" />
                   <Label text="Location" GridPane.rowIndex="3" />
                   <Label text="Start Date" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField editable="false" GridPane.columnIndex="1" />
+                  <TextField fx:id="apptTitleText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="apptDescriptionText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="apptLocationText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="apptTypeText" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="apptIdText" editable="false" GridPane.columnIndex="1" />
                   <Label text="Appointment ID" />
                   <Label text="Start Time" GridPane.rowIndex="5" />
                   <Label text="End Time" GridPane.columnIndex="2" GridPane.rowIndex="5">
@@ -46,8 +46,8 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="apptStartCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="apptEndCombo" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                   <Label text="End Date" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
@@ -83,11 +83,11 @@
                      <padding>
                         <Insets left="10.0" />
                      </padding></Label>
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <DatePicker GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="apptStartDateDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <DatePicker fx:id="apptEndDateDatePicker" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="apptContactCombo" prefWidth="150.0" GridPane.columnIndex="3" />
+                  <ComboBox fx:id="apptCustIdCombo" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="apptUserIdCombo" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <Label layoutX="21.0" layoutY="14.0" text="Modify Appointment">
