@@ -1,9 +1,6 @@
 package controller;
 
-import DBAccess.ContactsDAO;
-import DBAccess.CountriesDAO;
-import DBAccess.CustomersDAO;
-import DBAccess.DivisionsDAO;
+import DBAccess.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,8 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -54,6 +50,95 @@ public class ModifyAppointment implements Initializable {
     }
 
     public void onSaveModifyAppt(ActionEvent actionEvent) {
+        try {
+
+            LocalDateTime start = LocalDateTime.of(apptStartDateDatePicker.getValue(), apptStartCombo.getValue());
+            LocalDateTime end = LocalDateTime.of(apptStartDateDatePicker.getValue(), apptEndCombo.getValue());
+
+            ZoneId zid = ZoneId.systemDefault();
+            ZonedDateTime zStartTime = start.atZone(zid);
+            ZonedDateTime zendTime = end.atZone(zid);
+
+            ZonedDateTime ESTStartZoneTime = zStartTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+            ZonedDateTime ESTEndZoneTime = zendTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+
+            ZonedDateTime startBusinessHours = ZonedDateTime.of(start.toLocalDate(), LocalTime.of(8,0), ZoneId.of("America/New_York"));
+            ZonedDateTime endBusinessHours = startBusinessHours.plusHours(14);
+
+            if (ESTStartZoneTime.isBefore(startBusinessHours) || ESTEndZoneTime.isAfter(endBusinessHours)){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please choose a time between 8am - 10pm EST for the appointment.");
+                alert.showAndWait();
+                return;
+            }
+
+            String title = apptTitleText.getText();
+            String description = apptDescriptionText.getText();
+            String location = apptLocationText.getText();
+            String type = apptTypeText.getText();
+            Contacts contact = apptContactCombo.getValue();
+            Customers customerId = apptCustIdCombo.getValue();
+            User user = apptUserIdCombo.getValue();
+
+            Timestamp startTS = Timestamp.valueOf(start);
+            Timestamp endTS = Timestamp.valueOf(end);
+
+            if (title.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Title is empty. Please input a title.");
+                alert.showAndWait();
+                return;
+            } else if (description.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Description is empty. Please input a description.");
+                alert.showAndWait();
+                return;
+            } else if (location.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Location is empty. Please input a location.");
+                alert.showAndWait();
+                return;
+            } else if (type.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment type is empty. Please input a type.");
+                alert.showAndWait();
+                return;
+            } else if (contact == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Contact has not been selected. Please select a contact");
+                alert.showAndWait();
+                return;
+            } else if (customerId == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Customer ID has not been selected. Please select a customer ID.");
+                alert.showAndWait();
+                return;
+            } else if (user == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "User ID has not been selected. Please select a user ID.");
+                alert.showAndWait();
+                return;
+            }
+
+            if (apptStartCombo.getValue().isAfter(apptEndCombo.getValue())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Start time must be before end time.");
+                alert.showAndWait();
+                return;
+            }
+            if (apptStartDateDatePicker.getValue().isAfter(apptEndDateDatePicker.getValue())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Start date must be before end date.");
+                alert.showAndWait();
+                return;
+            }
+
+            AppointmentsDAO.insertAppointment(apptUserIdCombo.getValue().getUserId(), apptTitleText.getText(), apptDescriptionText.getText(),
+                    apptLocationText.getText(), apptContactCombo.getValue().getContactId(), apptTypeText.getText(), startTS, endTS, apptCustIdCombo.getValue().getCustomerId(), 0);
+
+            Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 850, 600);
+            stage.setTitle("Appointment Screen");
+            stage.setScene(scene);
+            stage.show();
+        } catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Form contains invalid input values or blanks. Please check and input proper values.");
+            alert.showAndWait();
+            //e.printStackTrace();
+        }
+
+
     }
 
     @Override
@@ -70,28 +155,27 @@ public class ModifyAppointment implements Initializable {
             apptEndDateDatePicker.setValue(LocalDate.from((selectedAppointment.getEndDateTime().toLocalDateTime())));
             apptStartCombo.setValue(LocalTime.from(selectedAppointment.getStartDateTime().toLocalDateTime()));
             apptEndCombo.setValue(LocalTime.from(selectedAppointment.getEndDateTime().toLocalDateTime()));
+
+            apptStartCombo.setItems(AddAppointment.apptTimesList());
+            apptEndCombo.setItems(AddAppointment.apptTimesList());
+
+
+
+            //apptCustIdCombo.setPromptText("Customer ID");
+            //apptUserIdCombo.setPromptText("User ID");
+
             apptContactCombo.setItems(ContactsDAO.selectAllContacts());
             Contacts contact = ContactsDAO.getContactById(selectedAppointment.getContactId());
             apptContactCombo.setValue(contact);
 
-            //apptCustIdCombo.setValue(selectedAppointment.getAppointmentId());
+            apptCustIdCombo.setItems(CustomersDAO.selectAllCustomers());
+            Customers customer = CustomersDAO.getCustomerById(selectedAppointment.getCustomerId());
+            apptCustIdCombo.setValue(customer);
+
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-            /*
-            PhoneNumberText.setText(String.valueOf(selectedCustomer.getPhone()));
-            CustNameText.setText(String.valueOf(selectedCustomer.getCustomerName()));
-
-            CountryCombo.setItems(CountriesDAO.getAllCountries());
-            Countries country = CountriesDAO.getCountryDivisionId(selectedCustomer.getDivisionId());
-            CountryCombo.setValue(country);
-
-            DivisionCombo.setItems(DivisionsDAO.getDivisionByCountry(selectedCustomer.getCountryId()));
-            Divisions division = DivisionsDAO.getDivision(selectedCustomer.getDivisionId());
-            DivisionCombo.setValue(division);
-
-             */
     }
 }

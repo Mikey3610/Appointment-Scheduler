@@ -3,6 +3,7 @@ package DBAccess;
 import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Contacts;
 import model.Customers;
 
 import java.sql.PreparedStatement;
@@ -51,7 +52,7 @@ public abstract class CustomersDAO {
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
-        while(rs.next()){
+        while (rs.next()) {
             int customerId = rs.getInt("Customer_ID");
             String customerName = rs.getString("Customer_Name");
             String address = rs.getString("Address");
@@ -72,7 +73,7 @@ public abstract class CustomersDAO {
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.setInt(1, customerId);
         ResultSet rs = ps.executeQuery();
-        while(rs.next()){
+        while (rs.next()) {
             String customerName = rs.getString("Customer_Name");
             String phone = rs.getString("Phone");
             String address = rs.getString("Address");
@@ -85,6 +86,35 @@ public abstract class CustomersDAO {
         }
         return null;
     }
+
+
+    public static Customers getCustomerById(int customerId) {
+        try {
+            //"SELECT C.* FROM Countries AS C INNER JOIN First_Level_Divisions AS D ON C.COUNTRY_ID = D.COUNTRY_ID AND D.DIVISION_ID = ?"
+            String SQL = "SELECT C.*, D.Country_ID AS Country_ID FROM customers AS C, countries AS D, first_level_divisions AS E\n" +
+                    "WHERE D.Country_ID = E.Country_ID\n" +
+                    "AND E.Division_ID = C.Division_ID AND Customer_ID = ?";
+            PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
+            ps.setInt(1, customerId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String customerName = rs.getString("Customer_Name");
+                String address = rs.getString("Address");
+                String postalCode = rs.getString("Postal_Code");
+                String phone = rs.getString("Phone");
+                int divisionId = rs.getInt("Division_ID");
+                int countryId = rs.getInt("Country_ID");
+                Customers customer = new Customers(customerId, customerName, address, postalCode, phone, divisionId, countryId);
+                return customer;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+}
+
     /*
      public static void selectAllCustomers(int customerId) throws SQLException {
         String sql = "SELECT * FROM CUSTOMERS WHERE Customer_ID =?";
@@ -102,5 +132,6 @@ public abstract class CustomersDAO {
             System.out.print(customerName + "\n");
         }
     }
-    */
 }
+
+     */
