@@ -90,7 +90,6 @@ public abstract class CustomersDAO {
 
     public static Customers getCustomerById(int customerId) {
         try {
-            //"SELECT C.* FROM Countries AS C INNER JOIN First_Level_Divisions AS D ON C.COUNTRY_ID = D.COUNTRY_ID AND D.DIVISION_ID = ?"
             String SQL = "SELECT C.*, D.Country_ID AS Country_ID FROM customers AS C, countries AS D, first_level_divisions AS E\n" +
                     "WHERE D.Country_ID = E.Country_ID\n" +
                     "AND E.Division_ID = C.Division_ID AND Customer_ID = ?";

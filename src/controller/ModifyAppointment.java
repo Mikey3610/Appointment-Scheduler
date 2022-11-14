@@ -159,8 +159,6 @@ public class ModifyAppointment implements Initializable {
             apptStartCombo.setItems(AddAppointment.apptTimesList());
             apptEndCombo.setItems(AddAppointment.apptTimesList());
 
-
-
             //apptCustIdCombo.setPromptText("Customer ID");
             //apptUserIdCombo.setPromptText("User ID");
 
@@ -171,6 +169,12 @@ public class ModifyAppointment implements Initializable {
             apptCustIdCombo.setItems(CustomersDAO.selectAllCustomers());
             Customers customer = CustomersDAO.getCustomerById(selectedAppointment.getCustomerId());
             apptCustIdCombo.setValue(customer);
+
+            apptUserIdCombo.setItems(UserDAO.selectAllUsers());
+            User user = UserDAO.getUserById(selectedAppointment.getUserId());
+            apptUserIdCombo.setValue(user);
+
+
 
 
 

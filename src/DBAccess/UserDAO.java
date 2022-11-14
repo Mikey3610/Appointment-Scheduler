@@ -42,4 +42,27 @@ public abstract class UserDAO {
         }
         return allUsers;
     }
+
+    public static User getUserById(int userId) {
+        try {
+            String SQL = "SELECT * FROM users WHERE User_ID = ?";
+            PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
+            ps.setInt(1,userId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                //int userId = rs.getInt("User_ID");
+                String userName = rs.getString("User_Name");
+                String password = rs.getString("Password");
+
+                User user = new User(userId,userName, password);
+                return user;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
