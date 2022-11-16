@@ -188,6 +188,36 @@ public class AddAppointment implements Initializable {
                 return;
             }
 
+            if ((StartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || StartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
+                alert.showAndWait();
+                return;
+            }
+
+            //check for conflicting times
+            int custId = CustIdCombo.getValue().getCustomerId();
+            for (Appointments appt : AppointmentsDAO.selectAllAppointments()){
+                if (appt.getCustomerId() != custId){
+                    continue;
+                }
+                if ((start.isAfter(appt.getStartDateTime().toLocalDateTime()) || start.isEqual(appt.getStartDateTime().toLocalDateTime())) && start.isBefore(appt.getEndDateTime().toLocalDateTime())){
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. Start time is conflicting with another appointment.");
+                    alert.showAndWait();
+                    return;
+                }
+                if (end.isAfter(appt.getStartDateTime().toLocalDateTime()) && (end.isEqual(appt.getEndDateTime().toLocalDateTime()) || end.isBefore(appt.getEndDateTime().toLocalDateTime()))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. End time is conflicting with another appointment.");
+                    alert.showAndWait();
+                    return;
+                }
+                if ((start.isBefore(appt.getStartDateTime().toLocalDateTime()) || start.isEqual(appt.getStartDateTime().toLocalDateTime()) && (end.isAfter(appt.getEndDateTime().toLocalDateTime()) || end.isEqual(appt.getEndDateTime().toLocalDateTime())))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. Appointment start and end times overlap with another appointment.");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+
+
             AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getUserId(), TitleText.getText(), DescriptionText.getText(),
                     LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), startTS, endTS, CustIdCombo.getValue().getCustomerId(), 0);
 

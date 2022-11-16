@@ -112,6 +112,29 @@ public class ModifyAppointment implements Initializable {
                 return;
             }
 
+            int custId = apptCustIdCombo.getValue().getCustomerId();
+            int apptId = Integer.parseInt(apptIdText.getText());
+            for (Appointments appt : AppointmentsDAO.selectAllAppointments()){
+                if (appt.getCustomerId() != custId || appt.getAppointmentId() == apptId){
+                    continue;
+                }
+                if ((start.isAfter(appt.getStartDateTime().toLocalDateTime()) || start.isEqual(appt.getStartDateTime().toLocalDateTime())) && start.isBefore(appt.getEndDateTime().toLocalDateTime())){
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. Start time is conflicting with another appointment.");
+                    alert.showAndWait();
+                    return;
+                }
+                if (end.isAfter(appt.getStartDateTime().toLocalDateTime()) && (end.isEqual(appt.getEndDateTime().toLocalDateTime()) || end.isBefore(appt.getEndDateTime().toLocalDateTime()))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. End time is conflicting with another appointment.");
+                    alert.showAndWait();
+                    return;
+                }
+                if ((start.isBefore(appt.getStartDateTime().toLocalDateTime()) || start.isEqual(appt.getStartDateTime().toLocalDateTime()) && (end.isAfter(appt.getEndDateTime().toLocalDateTime()) || end.isEqual(appt.getEndDateTime().toLocalDateTime())))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. Appointment start and end times overlap with another appointment.");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+
             if (apptStartCombo.getValue().isAfter(apptEndCombo.getValue())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Start time must be before end time.");
                 alert.showAndWait();

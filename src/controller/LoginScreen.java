@@ -1,5 +1,6 @@
 package controller;
 
+import DBAccess.AppointmentsDAO;
 import DBAccess.UserDAO;
 import javafx.event.ActionEvent;
 
@@ -9,10 +10,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Appointments;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 import java.time.ZoneId;
 import java.time.LocalDateTime;
@@ -52,17 +56,42 @@ public class LoginScreen implements Initializable {
     public void onLogin(ActionEvent actionEvent) throws IOException, SQLException {
         String userName = UserNameText.getText();
         String password = PasswordText.getText();
+
+        Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+        LocalDateTime nowTime = now.toLocalDateTime();
+        LocalDateTime plusFifteenTime = nowTime.plusMinutes(15);
+
         if(UserDAO.validatedUser(userName, password)){
+
+            User loginUser = UserDAO.loginUser(userName, password);
+            for (Appointments appt : AppointmentsDAO.selectAllAppointments()) {
+                if (loginUser.getUserId() == appt.getUserId()){
+                    continue;
+                }
+                //if ((start.isAfter(appt.getStartDateTime().toLocalDateTime()) || start.isEqual(appt.getStartDateTime().toLocalDateTime())) && start.isBefore(appt.getEndDateTime().toLocalDateTime())){
+                //                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. Start time is conflicting with another appointment.");
+                //                    alert.showAndWait();
+                //                    return;
+
+                if ((appt.getStartDateTime().toLocalDateTime().isEqual(nowTime) || appt.getStartDateTime().toLocalDateTime().isAfter(plusFifteenTime))
+                && ((appt.getStartDateTime().toLocalDateTime().isEqual(plusFifteenTime)) || appt.getStartDateTime().toLocalDateTime().isBefore(plusFifteenTime))){
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Upcoming appointment within 15 minutes.");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+
+
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 850, 600);
-            stage.setTitle("Main Appointment Screen");
+            stage.setTitle("Main Appointments Screen");
             stage.setScene(scene);
             stage.show();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(rb.getString("IncorrectLogin"));
+            alert.setContentText(rb.getString("Incorrect Login credentials."));
             alert.showAndWait();
         }
 

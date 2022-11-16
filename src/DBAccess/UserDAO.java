@@ -25,6 +25,22 @@ public abstract class UserDAO {
         return validatedUser;
     }
 
+    public static User loginUser(String userName, String password) throws SQLException {
+        String sql = "SELECT * FROM USERS WHERE User_Name= ? AND Password = ?";
+        PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
+        preparedStatement.setString(1, userName);
+        preparedStatement.setString(2, password);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        if(rs.next()){
+            int userId = rs.getInt("User_ID");
+            //String password = rs.getString("Password");
+            User loginUser = new User(userId, userName, password);
+            return loginUser;
+        }
+        return null;
+    }
+
 
     public static ObservableList<User> selectAllUsers() throws SQLException {
         String sql = "SELECT * FROM users";
