@@ -35,7 +35,7 @@ public abstract class UserDAO {
         if(rs.next()){
             int userId = rs.getInt("User_ID");
             //String password = rs.getString("Password");
-            User loginUser = new User(userId, userName, password);
+            User loginUser = new User(userId, userName, "");
             return loginUser;
         }
         return null;

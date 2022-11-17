@@ -118,11 +118,14 @@ public class AddAppointment implements Initializable {
             ZonedDateTime startBusinessHours = ZonedDateTime.of(start.toLocalDate(), LocalTime.of(8,0), ZoneId.of("America/New_York"));
             ZonedDateTime endBusinessHours = startBusinessHours.plusHours(14);
 
+            /*
             if (ESTStartZoneTime.isBefore(startBusinessHours) || ESTEndZoneTime.isAfter(endBusinessHours)){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Please choose a time between 8am - 10pm EST for the appointment.");
                 alert.showAndWait();
                 return;
             }
+
+             */
 
             // DatePicker will give you a "LocalDate" and combo box gives a localtime object
             //LocalDate - datepicker
@@ -200,18 +203,21 @@ public class AddAppointment implements Initializable {
                 if (appt.getCustomerId() != custId){
                     continue;
                 }
+                //checks whether the appt start time starts right on another appointment's start time or is within another appointment
                 if ((start.isAfter(appt.getStartDateTime().toLocalDateTime()) || start.isEqual(appt.getStartDateTime().toLocalDateTime())) && start.isBefore(appt.getEndDateTime().toLocalDateTime())){
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. Start time is conflicting with another appointment.");
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment time conflict. Please adjust the time.");
                     alert.showAndWait();
                     return;
                 }
+                //checks that the end time is less than or equal to (before) the ending of another apointment or falls within another appointment
                 if (end.isAfter(appt.getStartDateTime().toLocalDateTime()) && (end.isEqual(appt.getEndDateTime().toLocalDateTime()) || end.isBefore(appt.getEndDateTime().toLocalDateTime()))) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. End time is conflicting with another appointment.");
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment time conflict. Please adjust the time.");
                     alert.showAndWait();
                     return;
                 }
-                if ((start.isBefore(appt.getStartDateTime().toLocalDateTime()) || start.isEqual(appt.getStartDateTime().toLocalDateTime()) && (end.isAfter(appt.getEndDateTime().toLocalDateTime()) || end.isEqual(appt.getEndDateTime().toLocalDateTime())))) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. Appointment start and end times overlap with another appointment.");
+                //checks that the new appointment completely overlaps another appointment
+                if (((start.isBefore(appt.getStartDateTime().toLocalDateTime()) || start.isEqual(appt.getStartDateTime().toLocalDateTime())) && ((end.isAfter(appt.getEndDateTime().toLocalDateTime()) || end.isEqual(appt.getEndDateTime().toLocalDateTime()))))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment time conflict. Please adjust the time.");
                     alert.showAndWait();
                     return;
                 }

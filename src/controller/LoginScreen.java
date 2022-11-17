@@ -57,27 +57,26 @@ public class LoginScreen implements Initializable {
         String userName = UserNameText.getText();
         String password = PasswordText.getText();
 
-        Timestamp now = Timestamp.valueOf(LocalDateTime.now());
-        LocalDateTime nowTime = now.toLocalDateTime();
+
+        LocalDateTime nowTime = LocalDateTime.now();
         LocalDateTime plusFifteenTime = nowTime.plusMinutes(15);
 
-        if(UserDAO.validatedUser(userName, password)){
+        User loginUser = UserDAO.loginUser(userName, password);
+        if(loginUser != null){
 
-            User loginUser = UserDAO.loginUser(userName, password);
             for (Appointments appt : AppointmentsDAO.selectAllAppointments()) {
                 if (loginUser.getUserId() == appt.getUserId()){
                     continue;
                 }
-                //if ((start.isAfter(appt.getStartDateTime().toLocalDateTime()) || start.isEqual(appt.getStartDateTime().toLocalDateTime())) && start.isBefore(appt.getEndDateTime().toLocalDateTime())){
-                //                    Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment conflict. Start time is conflicting with another appointment.");
-                //                    alert.showAndWait();
-                //                    return;
-
-                if ((appt.getStartDateTime().toLocalDateTime().isEqual(nowTime) || appt.getStartDateTime().toLocalDateTime().isAfter(plusFifteenTime))
-                && ((appt.getStartDateTime().toLocalDateTime().isEqual(plusFifteenTime)) || appt.getStartDateTime().toLocalDateTime().isBefore(plusFifteenTime))){
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Upcoming appointment within 15 minutes.");
+                if (((appt.getStartDateTime().toLocalDateTime().isEqual(nowTime) || appt.getStartDateTime().toLocalDateTime().isAfter(nowTime)) &&
+                        ((appt.getStartDateTime().toLocalDateTime().isBefore(plusFifteenTime)) || (appt.getStartDateTime().toLocalDateTime().isEqual(plusFifteenTime))))) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Upcoming appointment within 15 minutes." + "\nAppointment ID: " + appt.getAppointmentId() + "\nDate & Time: " + appt.getStartDateTime());
                     alert.showAndWait();
                     return;
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "No upcoming appointments.");
+                    alert.showAndWait();
                 }
             }
 
