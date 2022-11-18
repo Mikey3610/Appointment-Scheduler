@@ -224,7 +224,7 @@ public class AddAppointment implements Initializable {
             }
 
 
-            AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getUserId(), TitleText.getText(), DescriptionText.getText(),
+            AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getId(), TitleText.getText(), DescriptionText.getText(),
                     LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), startTS, endTS, CustIdCombo.getValue().getCustomerId(), 0);
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));

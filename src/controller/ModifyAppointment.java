@@ -146,7 +146,7 @@ public class ModifyAppointment implements Initializable {
                 return;
             }
 
-            AppointmentsDAO.insertAppointment(apptUserIdCombo.getValue().getUserId(), apptTitleText.getText(), apptDescriptionText.getText(),
+            AppointmentsDAO.insertAppointment(apptUserIdCombo.getValue().getId(), apptTitleText.getText(), apptDescriptionText.getText(),
                     apptLocationText.getText(), apptContactCombo.getValue().getContactId(), apptTypeText.getText(), startTS, endTS, apptCustIdCombo.getValue().getCustomerId(), 0);
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));

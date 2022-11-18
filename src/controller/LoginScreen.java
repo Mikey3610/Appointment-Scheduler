@@ -16,7 +16,6 @@ import model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.*;
 import java.time.ZoneId;
 import java.time.LocalDateTime;
@@ -64,20 +63,21 @@ public class LoginScreen implements Initializable {
         User loginUser = UserDAO.loginUser(userName, password);
         if(loginUser != null){
 
+            boolean apptFound = false;
             for (Appointments appt : AppointmentsDAO.selectAllAppointments()) {
-                if (loginUser.getUserId() == appt.getUserId()){
+                if (loginUser.getId() != appt.getUserId()){
                     continue;
                 }
-                if (((appt.getStartDateTime().toLocalDateTime().isEqual(nowTime) || appt.getStartDateTime().toLocalDateTime().isAfter(nowTime)) &&
-                        ((appt.getStartDateTime().toLocalDateTime().isBefore(plusFifteenTime)) || (appt.getStartDateTime().toLocalDateTime().isEqual(plusFifteenTime))))) {
+                if (appt.getStartDateTime().toLocalDateTime().isAfter(nowTime) &&
+                        (appt.getStartDateTime().toLocalDateTime().isBefore(plusFifteenTime))) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Upcoming appointment within 15 minutes." + "\nAppointment ID: " + appt.getAppointmentId() + "\nDate & Time: " + appt.getStartDateTime());
                     alert.showAndWait();
-                    return;
+                    apptFound = true;
                 }
-                else {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "No upcoming appointments.");
-                    alert.showAndWait();
-                }
+            }
+            if (!apptFound){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "No upcoming appointments.");
+                alert.showAndWait();
             }
 
 
