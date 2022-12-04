@@ -1,11 +1,11 @@
 package model;
 
-public class CustomersByMonth {
+public class TypeMonthTotal {
     private String type;
     private String month;
     private int total;
 
-    public CustomersByMonth(String type, String month, int total){
+    public TypeMonthTotal(String type, String month, int total){
         this.type = type;
         this.month = month;
         this.total = total;

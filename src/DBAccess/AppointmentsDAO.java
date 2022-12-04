@@ -4,6 +4,7 @@ import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointments;
+import model.TypeMonthTotal;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ public abstract class AppointmentsDAO {
 
         ps.setInt(1, userId);
         ps.setString(2, title);
-        ps.setString(3, description);s
+        ps.setString(3, description);
         ps.setString(4, location);
         ps.setInt(5, contactId);
         ps.setString(6, type);
@@ -131,29 +132,22 @@ public abstract class AppointmentsDAO {
         return allAppointments;
     }
 
-    public static ObservableList<Appointments> getAppointmentsByMonthAndType() throws SQLException {
-        String SQL = "SELECT * FROM APPOINTMENTS WHERE MONTH(start) = MONTH(CURRENT_DATE()) AND YEAR(start) = YEAR(CURRENT_DATE())";
+    public static ObservableList<TypeMonthTotal> getAppointmentsByTypeAndMonth() throws SQLException {
+        String SQL = "SELECT Type, month(start) AS Month, COUNT(type) AS Total FROM APPOINTMENTS" +
+                "GROUP BY month(start), type";
         PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery(SQL);
-        ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
+        ObservableList<TypeMonthTotal> typeMonth = FXCollections.observableArrayList();
 
         while (rs.next()) {
-            int appointmentId = rs.getInt("Appointment_ID");
-            String title = rs.getString("Title");
-            String description = rs.getString("Description");
-            String location = rs.getString("Location");
             String type = rs.getString("Type");
-            Timestamp startDateTime = rs.getTimestamp("Start");
-            Timestamp endDateTime = rs.getTimestamp("End");
-            int customerId = rs.getInt("Customer_ID");
-            int UserId = rs.getInt("User_ID");
-            int contactId = rs.getInt("Contact_ID");
+            String month = rs.getString("Month");
+            int total = rs.getInt("Total");
 
-            Appointments a = new Appointments(appointmentId, title, description, location, type, startDateTime,
-                    endDateTime, customerId, UserId, contactId);
-            allAppointments.add(a);
+            TypeMonthTotal a = new TypeMonthTotal(type, month, total);
+            typeMonth.add(a);
         }
-        return allAppointments;
+        return typeMonth;
     }
 
 
