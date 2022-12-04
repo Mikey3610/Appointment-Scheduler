@@ -40,11 +40,12 @@ public class ApptsTypeMonthReport implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             typeMonthTotalTable.setItems(AppointmentsDAO.getAppointmentsByTypeAndMonth());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
         typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
         monthCol.setCellValueFactory(new PropertyValueFactory<>("Month"));
         totalCol.setCellValueFactory(new PropertyValueFactory<>("Total"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

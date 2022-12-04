@@ -133,8 +133,8 @@ public abstract class AppointmentsDAO {
     }
 
     public static ObservableList<TypeMonthTotal> getAppointmentsByTypeAndMonth() throws SQLException {
-        String SQL = "SELECT Type, month(start) AS Month, COUNT(type) AS Total FROM APPOINTMENTS" +
-                "GROUP BY month(start), type";
+        //Need to fix this SQL command
+        String SQL = "SELECT Type, MONTH(Start) AS Month, COUNT(Type) AS Total FROM APPOINTMENTS GROUP BY Type, MONTH(Start)";
         PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery(SQL);
         ObservableList<TypeMonthTotal> typeMonth = FXCollections.observableArrayList();
