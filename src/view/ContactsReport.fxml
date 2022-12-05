@@ -14,18 +14,18 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TableView layoutX="24.0" layoutY="76.0" prefHeight="311.0" prefWidth="613.0">
+            <TableView fx:id="contactsTable" layoutX="24.0" layoutY="76.0" prefHeight="311.0" prefWidth="613.0">
               <columns>
-                <TableColumn prefWidth="111.0" text="Appointment ID" />
-                <TableColumn prefWidth="53.0" text="Title" />
-                  <TableColumn prefWidth="50.0" text="Type" />
-                  <TableColumn prefWidth="94.0" text="Description" />
-                  <TableColumn prefWidth="114.0" text="Start Date &amp; Time" />
-                  <TableColumn prefWidth="110.0" text="End Date &amp; Time" />
-                  <TableColumn text="Customer ID" />
+                <TableColumn fx:id="apptIDCol" prefWidth="111.0" text="Appointment ID" />
+                <TableColumn fx:id="titleCol" prefWidth="53.0" text="Title" />
+                  <TableColumn fx:id="typeCol" prefWidth="50.0" text="Type" />
+                  <TableColumn fx:id="descriptionCol" prefWidth="94.0" text="Description" />
+                  <TableColumn fx:id="startDateCol" prefWidth="114.0" text="Start Date &amp; Time" />
+                  <TableColumn fx:id="endDateCol" prefWidth="110.0" text="End Date &amp; Time" />
+                  <TableColumn fx:id="custIdCol" text="Customer ID" />
               </columns>
             </TableView>
-            <ComboBox layoutX="202.0" layoutY="38.0" prefWidth="150.0" promptText="Select Contact" />
+            <ComboBox fx:id="selectContact" layoutX="202.0" layoutY="38.0" onAction="#onSelectContact" prefWidth="150.0" promptText="Select Contact" />
          </children>
       </AnchorPane>
    </children>

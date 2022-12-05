@@ -3,13 +3,12 @@ package DBAccess;
 import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Appointments;
 import model.Contacts;
+import model.ContactList;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 public abstract class ContactsDAO {
     public static ObservableList<Contacts> selectAllContacts() throws SQLException {

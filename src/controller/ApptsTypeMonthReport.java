@@ -16,7 +16,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import model.TypeMonthTotal;
 import DBAccess.AppointmentsDAO;
 
 public class ApptsTypeMonthReport implements Initializable {

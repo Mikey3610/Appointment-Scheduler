@@ -4,7 +4,7 @@ import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointments;
-import model.TypeMonthTotal;
+import model.ContactList;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -132,25 +132,21 @@ public abstract class AppointmentsDAO {
         return allAppointments;
     }
 
-    public static ObservableList<TypeMonthTotal> getAppointmentsByTypeAndMonth() throws SQLException {
-        //Need to fix this SQL command
+    public static ObservableList<ContactList> getAppointmentsByTypeAndMonth() throws SQLException {
         String SQL = "SELECT Type, MONTH(Start) AS Month, COUNT(Type) AS Total FROM APPOINTMENTS GROUP BY Type, MONTH(Start)";
         PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery(SQL);
-        ObservableList<TypeMonthTotal> typeMonth = FXCollections.observableArrayList();
+        ObservableList<ContactList> typeMonth = FXCollections.observableArrayList();
 
         while (rs.next()) {
             String type = rs.getString("Type");
             String month = rs.getString("Month");
             int total = rs.getInt("Total");
 
-            TypeMonthTotal a = new TypeMonthTotal(type, month, total);
+            ContactList a = new ContactList(type, month, total);
             typeMonth.add(a);
         }
         return typeMonth;
     }
-
-
-
 
 }
