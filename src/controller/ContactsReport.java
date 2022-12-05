@@ -63,5 +63,7 @@ public class ContactsReport implements Initializable {
     }
 
     public void onSelectContact(ActionEvent actionEvent) throws SQLException {
+        //appointmentTable.setItems(AppointmentsCRUD.getContactAppointments(contactComboBox.getValue().getContactId()));
+        contactsTable.setItems(AppointmentsDAO.selectContact(selectContact.getValue().getContactId()));
     }
 }

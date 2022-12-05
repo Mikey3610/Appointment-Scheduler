@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointments;
 import model.ContactList;
+import model.Customers;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -133,7 +134,7 @@ public abstract class AppointmentsDAO {
     }
 
     public static ObservableList<ContactList> getAppointmentsByTypeAndMonth() throws SQLException {
-        String SQL = "SELECT Type, MONTH(Start) AS Month, COUNT(Type) AS Total FROM APPOINTMENTS GROUP BY Type, MONTH(Start)";
+        String SQL = "SELECT Type, MONTHNAME(Start) AS Month, COUNT(Type) AS Total FROM APPOINTMENTS GROUP BY Type, MONTHNAME(Start)";
         PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery(SQL);
         ObservableList<ContactList> typeMonth = FXCollections.observableArrayList();
@@ -147,6 +148,34 @@ public abstract class AppointmentsDAO {
             typeMonth.add(a);
         }
         return typeMonth;
+    }
+
+    //test
+
+    public static ObservableList<Appointments> selectContact(int contactID) throws SQLException {
+        String SQL = "SELECT * FROM appointments where Contact_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
+        ps.setInt(1,contactID);
+        ResultSet rs = ps.executeQuery();
+        ObservableList<Appointments> contacts = FXCollections.observableArrayList();
+
+        while (rs.next()) {
+                int appointmentId = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                int contactId = rs.getInt("Contact_ID");
+                String type = rs.getString("Type");
+                Timestamp startDateTime = rs.getTimestamp("Start");
+                Timestamp endDateTime = rs.getTimestamp("End");
+                int customerId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+
+                Appointments selectedContact = new Appointments(appointmentId, title, description, location, type, startDateTime, endDateTime, customerId, userId, contactId);
+                contacts.add(selectedContact);
+        }
+
+        return contacts;
     }
 
 }
