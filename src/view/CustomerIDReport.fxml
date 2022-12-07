@@ -13,10 +13,10 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TableView layoutX="65.0" layoutY="93.0" prefHeight="296.0" prefWidth="526.0">
+            <TableView fx:id="custIdTable" layoutX="65.0" layoutY="93.0" prefHeight="296.0" prefWidth="526.0">
               <columns>
-                <TableColumn prefWidth="280.0" text="Customer ID" />
-                <TableColumn prefWidth="245.0" text="Total" />
+                <TableColumn fx:id="custIdCol" prefWidth="280.0" text="Customer ID" />
+                <TableColumn fx:id="totalCol" prefWidth="245.0" text="Total" />
               </columns>
             </TableView>
             <Button fx:id="BackBtn" layoutX="591.0" layoutY="413.0" mnemonicParsing="false" onAction="#onBackToReportsMenu" text="Back" />

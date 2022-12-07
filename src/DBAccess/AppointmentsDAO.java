@@ -150,8 +150,6 @@ public abstract class AppointmentsDAO {
         return typeMonth;
     }
 
-    //test
-
     public static ObservableList<Appointments> selectContact(int contactID) throws SQLException {
         String SQL = "SELECT * FROM appointments where Contact_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(SQL);

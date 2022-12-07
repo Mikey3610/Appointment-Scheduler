@@ -3,12 +3,12 @@ package DBAccess;
 import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Contacts;
-import model.Customers;
+import model.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public abstract class CustomersDAO {
 
@@ -112,25 +112,20 @@ public abstract class CustomersDAO {
         }
         return null;
     }
-}
 
-    /*
-     public static void selectAllCustomers(int customerId) throws SQLException {
-        String sql = "SELECT * FROM CUSTOMERS WHERE Customer_ID =?";
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        ps.setInt(1,"customerId");
-        ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-            int customerIdFK = rs.getInt("Customer_ID");
-            String customerName = rs.getString("Customer_Name");
-            String address = rs.getString("Address");
-            String postalCode = rs.getString("Postal_Code");
-            String phone = rs.getString("Phone");
-            int divisionId = rs.getInt("Division_ID");
-            System.out.print(customerIdFK + " | ");
-            System.out.print(customerName + "\n");
+    public static ObservableList<CustomerIDReport> getCustomerIdCount() throws SQLException {
+        String SQL = "SELECT Customer_ID, COUNT(Customer_ID) AS Total FROM APPOINTMENTS GROUP BY Customer_ID";
+        PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery(SQL);
+        ObservableList<CustomerIDReport> custIdCount = FXCollections.observableArrayList();
+
+        while (rs.next()) {
+            int customerId = rs.getInt("Customer_ID");
+            int total = rs.getInt("Total");
+
+            CustomerIDReport a = new CustomerIDReport(customerId, total);
+            custIdCount.add(a);
         }
+        return custIdCount;
     }
 }
-
-     */
