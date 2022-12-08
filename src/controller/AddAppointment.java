@@ -26,6 +26,7 @@ import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+//Class to add appointments
 public class AddAppointment implements Initializable {
 
     public TextField ApptIdText;
@@ -41,7 +42,7 @@ public class AddAppointment implements Initializable {
     public DatePicker EndDateDatePicker;
     public ComboBox<LocalTime> EndTimeCombo;
 
-
+//Will autofill all of the fields of the different variables
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         StartTimeCombo.setPromptText("Select start time...");
@@ -81,7 +82,7 @@ public class AddAppointment implements Initializable {
 
 
     }
-
+//Loop that will populate the comboboxes for selecting times of appointments
     public static ObservableList<LocalTime> apptTimesList() {
         ObservableList<LocalTime> times = FXCollections.observableArrayList();
         LocalTime start = LocalTime.of(1, 00);
@@ -118,14 +119,14 @@ public class AddAppointment implements Initializable {
             ZonedDateTime startBusinessHours = ZonedDateTime.of(start.toLocalDate(), LocalTime.of(8,0), ZoneId.of("America/New_York"));
             ZonedDateTime endBusinessHours = startBusinessHours.plusHours(14);
 
-            /*
+
             if (ESTStartZoneTime.isBefore(startBusinessHours) || ESTEndZoneTime.isAfter(endBusinessHours)){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Please choose a time between 8am - 10pm EST for the appointment.");
                 alert.showAndWait();
                 return;
             }
 
-             */
+
 
             // DatePicker will give you a "LocalDate" and combo box gives a localtime object
             //LocalDate - datepicker
@@ -140,12 +141,7 @@ public class AddAppointment implements Initializable {
             Contacts contact = ContactCombo.getValue();
             Customers customerId = CustIdCombo.getValue();
             User user = UserIdCombo.getValue();
-            /*
-            StartTimeCombo.getValue();
-            EndTimeCombo.getValue();
-            StartDateDatePicker.getValue();
-            EndDateDatePicker.getValue();
-            */
+
 
             Timestamp startTS = Timestamp.valueOf(start);
             Timestamp endTS = Timestamp.valueOf(end);
@@ -197,7 +193,7 @@ public class AddAppointment implements Initializable {
                 return;
             }
 
-            //check for conflicting times
+            //Checks whether there are conflicting times of appts
             int custId = CustIdCombo.getValue().getCustomerId();
             for (Appointments appt : AppointmentsDAO.selectAllAppointments()){
                 if (appt.getCustomerId() != custId){
@@ -225,7 +221,7 @@ public class AddAppointment implements Initializable {
 
 
             AppointmentsDAO.insertAppointment(UserIdCombo.getValue().getId(), TitleText.getText(), DescriptionText.getText(),
-                    LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), startTS, endTS, CustIdCombo.getValue().getCustomerId(), 0);
+                    LocationText.getText(), ContactCombo.getValue().getContactId(), TypeText.getText(), startTS, endTS, CustIdCombo.getValue().getCustomerId());
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

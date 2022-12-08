@@ -146,8 +146,9 @@ public class ModifyAppointment implements Initializable {
                 return;
             }
 
-            AppointmentsDAO.insertAppointment(apptUserIdCombo.getValue().getId(), apptTitleText.getText(), apptDescriptionText.getText(),
-                    apptLocationText.getText(), apptContactCombo.getValue().getContactId(), apptTypeText.getText(), startTS, endTS, apptCustIdCombo.getValue().getCustomerId(), 0);
+            AppointmentsDAO.updateAppointment(apptTitleText.getText(), apptDescriptionText.getText(), apptLocationText.getText(), apptTypeText.getText(),
+                    startTS, endTS, apptCustIdCombo.getValue().getCustomerId(), apptUserIdCombo.getValue().getId(), apptContactCombo.getValue().getContactId(), selectedAppointment.getAppointmentId());
+            //Appointments(int appointmentId, String title, String description, String location, String type, Timestamp startDateTime, Timestamp endDateTime, int customerId, int userId, int contactId)
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -158,7 +159,7 @@ public class ModifyAppointment implements Initializable {
         } catch(Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Form contains invalid input values or blanks. Please check and input proper values.");
             alert.showAndWait();
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
 

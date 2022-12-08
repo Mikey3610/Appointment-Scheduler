@@ -90,11 +90,6 @@ public class ModifyCustomer implements Initializable {
             CustomersDAO.updateCustomer(selectedCustomer.getCustomerId(), CustNameText.getText(), AddressText.getText(), PostalCodeText.getText(), PhoneNumberText.getText(), DivisionCombo.getValue().getDivisionId());
 
 
-            //updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId)
-
-            //CustomersDAO.insertCustomer(CustNameText.getText(), AddressText.getText(), PostalCodeText.getText(), PhoneNumberText.getText(),
-            //                    DivisionCombo.getValue().getDivisionId());
-
             Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 850, 600);

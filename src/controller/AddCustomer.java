@@ -86,6 +86,7 @@ public class AddCustomer implements Initializable {
                 return;
             }
 
+            //Inserts the input values in the different variables using the insertCustomer method in the CustomersDAO class
             CustomersDAO.insertCustomer(CustNameText.getText(), AddressText.getText(), PostalCodeText.getText(), PhoneNumberText.getText(),
                     DivisionCombo.getValue().getDivisionId());
 
@@ -101,6 +102,7 @@ public class AddCustomer implements Initializable {
         }
     }
 
+    //Will display the proper division (region) that corresponds to whatever country the user has selected
     public void onCountryCombo(ActionEvent actionEvent) {
         int countryId = CountryCombo.getValue().getCountryId();
         ObservableList<Divisions> list = DivisionsDAO.getDivisionByCountry(countryId);

@@ -35,6 +35,7 @@ public class ApptsTypeMonthReport implements Initializable {
         stage.show();
     }
 
+    //Autopopulates the table
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

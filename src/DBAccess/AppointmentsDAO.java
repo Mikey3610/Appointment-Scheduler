@@ -14,10 +14,10 @@ import java.sql.Timestamp;
 
 public abstract class AppointmentsDAO {
 
-    public static int insertAppointment(int userId, String title, String description, String location, int contactId, String type, Timestamp start, Timestamp end, int customerId, int Appointment_ID) throws SQLException {
+    //method that inserts appointment into Appointments object to be displayed on MainAppointmentScreen class
+    public static int insertAppointment(int userId, String title, String description, String location, int contactId, String type, Timestamp start, Timestamp end, int customerId) throws SQLException {
         String sql = "INSERT INTO APPOINTMENTS (User_ID, Title, Description, Location, Contact_ID, Type, Start, End, Customer_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-
         ps.setInt(1, userId);
         ps.setString(2, title);
         ps.setString(3, description);
@@ -32,22 +32,40 @@ public abstract class AppointmentsDAO {
         return rowsAffected;
     }
 
-    public static int updateAppointment(int appointmentId, String title, String description, String location, String type, Timestamp start, Timestamp end, int userId, int contactId, int customerId) throws SQLException {
-        String sql = "UPDATE APPOINTMENTS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Appointment_ID = ?)";
+    public static int updateAppointment(String title, String description, String location, String type, Timestamp start, Timestamp end, int customerId, int userId, int contactId, int appointmentId) throws SQLException {
+        String sql = "UPDATE APPOINTMENTS SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        ps.setInt(1, appointmentId);
-        ps.setString(2, title);
-        ps.setString(3, description);
-        ps.setString(4, location);
-        ps.setString(5, type);
-        ps.setTimestamp(6, start);
-        ps.setTimestamp(7, end);
+        ps.setString(1, title);
+        ps.setString(2, description);
+        ps.setString(3, location);
+        ps.setString(4, type);
+        ps.setTimestamp(5, start);
+        ps.setTimestamp(6, end);
+        ps.setInt(7, customerId);
         ps.setInt(8, userId);
         ps.setInt(9, contactId);
-        ps.setInt(10, customerId);
+        ps.setInt(10, appointmentId);
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
     }
+
+    //Using CustomersDAO updateCustomer to revise updateAppointment
+    /*
+    public static int updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId) throws SQLException {
+        String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1, customerName);
+        ps.setString(2, address);
+        ps.setString(3, postalCode);
+        ps.setString(4, phone);
+        ps.setInt(5, divisionId);
+        ps.setInt(6, customerId);
+        // Way to debug
+        // System.out.println(ps.toString());
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+    }
+     */
 
     public static int deleteAppointment(int appointmentId) throws SQLException {
         String sql = "DELETE FROM APPOINTMENTS WHERE Appointment_ID = ?";
