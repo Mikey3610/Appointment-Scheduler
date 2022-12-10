@@ -82,10 +82,6 @@ public class MainAppointmentScreen implements Initializable {
         appointmentsTable.setItems(AppointmentsDAO.selectAllAppointments());
     }
 
-    public void onViewCust(ActionEvent actionEvent) {
-
-    }
-
     public void onAddAppt(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

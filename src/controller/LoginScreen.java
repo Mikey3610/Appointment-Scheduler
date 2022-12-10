@@ -2,6 +2,7 @@ package controller;
 
 import DBAccess.AppointmentsDAO;
 import DBAccess.UserDAO;
+import Lambdas.CurrentTimeLambda;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXMLLoader;
@@ -57,7 +58,14 @@ public class LoginScreen implements Initializable {
         String password = PasswordText.getText();
 
 
-        LocalDateTime nowTime = LocalDateTime.now();
+        //lambda that will convert to localDateTime
+        CurrentTimeLambda localDateTime = now -> {
+            LocalDateTime rightNow = LocalDateTime.now();
+            return rightNow;
+        };
+
+
+        LocalDateTime nowTime = localDateTime.currentTime(localDateTime);//Changed from assigning before lambda = LocalDateTime.now();
         LocalDateTime plusFifteenTime = nowTime.plusMinutes(15);
 
         User loginUser = UserDAO.loginUser(userName, password);
