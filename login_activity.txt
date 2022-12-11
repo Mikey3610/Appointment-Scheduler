@@ -1,0 +1,16 @@
+User test successfully logged in at 2022-12-10T14:54:14.256492300
+User test successfully logged in at 2022-12-10T14:55:32.047435600
+User admin successfully logged in at 2022-12-10T14:55:50.651543500
+User test made an invalid login at 2022-12-10T14:56:04.320346300
+User test made an invalid login at 2022-12-10T14:57:36.505522800
+User test successfully logged in at 2022-12-10T14:58:03.688614200
+User test made an invalid login at 2022-12-10T14:58:19.715717400
+User test successfully logged in at 2022-12-10T15:02:46.283270100
+User admin successfully logged in at 2022-12-10T15:03:10.403030
+User test successfully logged in at 2022-12-11T06:43:18.098378
+User test successfully logged in at 2022-12-11T06:44:25.077412100
+User test successfully logged in at 2022-12-11T08:26:22.279640900
+User test successfully logged in at 2022-12-11T08:34:15.637662600
+User test successfully logged in at 2022-12-11T08:42:24.672505800
+User asdf made an invalid login at 2022-12-11T08:44:35.961944800
+User admin successfully logged in at 2022-12-11T08:45:06.222232200

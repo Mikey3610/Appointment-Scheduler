@@ -1,5 +1,7 @@
 package helper;
 
+import Lambdas.WelcomeMessage;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -20,6 +22,12 @@ public abstract class JDBC {
             Class.forName(driver); // Locate Driver
             connection = DriverManager.getConnection(jdbcUrl, userName, password); // Reference Connection object
             System.out.println("Connection successful!");
+            WelcomeMessage message = s ->
+            {
+                String welcome = "You are now connected to the database";
+                return welcome;
+            };
+            System.out.println(message.welcomeMessage(message));
         }
         catch(Exception e)
         {

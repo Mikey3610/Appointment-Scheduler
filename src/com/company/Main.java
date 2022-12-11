@@ -17,7 +17,6 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         JDBC.openConnection();
-        //CountriesDAO.checkDateConversion();
         launch(args);
         JDBC.closeConnection();
 
