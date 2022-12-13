@@ -14,3 +14,12 @@ User test successfully logged in at 2022-12-11T08:34:15.637662600
 User test successfully logged in at 2022-12-11T08:42:24.672505800
 User asdf made an invalid login at 2022-12-11T08:44:35.961944800
 User admin successfully logged in at 2022-12-11T08:45:06.222232200
+User test successfully logged in at 2022-12-12T19:35:23.489680500
+User admin successfully logged in at 2022-12-12T19:36:57.817573100
+User Testttt made an invalid login at 2022-12-12T19:37:29.018972900
+User admin made an invalid login at 2022-12-12T19:37:43.693350400
+User admin successfully logged in at 2022-12-12T19:37:55.377455700
+User test successfully logged in at 2022-12-12T20:01:47.945860900
+User test successfully logged in at 2022-12-12T20:03:12.301205400
+User test successfully logged in at 2022-12-12T20:03:44.180022100
+User admin successfully logged in at 2022-12-12T21:02:43.887485200

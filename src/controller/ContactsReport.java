@@ -21,6 +21,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/** This class will display the contact party's information from within the stored appointment information.*/
 public class ContactsReport implements Initializable {
 
     public TableView contactsTable;
@@ -33,7 +34,9 @@ public class ContactsReport implements Initializable {
     public TableColumn endDateCol;
     public TableColumn custIdCol;
 
-
+    /** This method will return the user back to the Reports menu.
+     * @param actionEvent Returns the user to the Reports menu screen.
+     * */
     public void onBackToReportsMenu(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportsMenu.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -43,6 +46,10 @@ public class ContactsReport implements Initializable {
         stage.show();
     }
 
+    /** This method autopopulates this screen with the corresponding contact data from the appointments.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -62,6 +69,9 @@ public class ContactsReport implements Initializable {
 
     }
 
+    /** This method will retrieve the contact ID from the contact data in the database.
+     * @param actionEvent Retrieves the contact ID info for the user to select from.
+     * */
     public void onSelectContact(ActionEvent actionEvent) throws SQLException {
         //appointmentTable.setItems(AppointmentsCRUD.getContactAppointments(contactComboBox.getValue().getContactId()));
         contactsTable.setItems(AppointmentsDAO.selectContact(selectContact.getValue().getContactId()));

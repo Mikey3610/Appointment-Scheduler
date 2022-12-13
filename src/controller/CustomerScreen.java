@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This class stores all of the information of the customers and displays that to the user.*/
 public class CustomerScreen implements Initializable {
     public TableView <Customers> customerTable;
     public TableColumn customerIdCol;
@@ -28,6 +29,10 @@ public class CustomerScreen implements Initializable {
     public TableColumn divisionIdCol;
     public static Customers customerToModify;
 
+    /** This method intiliazes the Customer Screen with the data stored in the database for customers.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -43,9 +48,11 @@ public class CustomerScreen implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
+    /** This method will take the user to the Add Customer screen.
+     * @param actionEvent Changes the screen to the Add Customer screen.
+     * */
     public void onAddCust(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddCustomer.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -54,10 +61,14 @@ public class CustomerScreen implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    /** This method allows the user to select one of the customers from the Customer Screen and modify or delete it. */
     public static Customers customerToModify() {
         return customerToModify;
     }
 
+    /** This method will bring the user to the Modify Customer screen if they have a customer selected on the screen.
+     * @param actionEvent Changes to the Modify Customer screen.
+     * */
     public void onModifyCust(ActionEvent actionEvent) throws IOException {
         customerToModify = customerTable.getSelectionModel().getSelectedItem();
 
@@ -74,6 +85,9 @@ public class CustomerScreen implements Initializable {
         }
     }
 
+    /** This method will delete the selected customer and its data from the database.
+     * @param actionEvent This action deletes the customer and its data from the database.
+     * */
     public void onDeleteCust(ActionEvent actionEvent) throws SQLException {
         Customers selectedCust = customerTable.getSelectionModel().getSelectedItem();
 
@@ -94,6 +108,9 @@ public class CustomerScreen implements Initializable {
         }
     }
 
+    /** This method will return the user to the main appointments screen and prompt the user with a confirmation window.
+     * @param actionEvent This action brings the user back to the main appointments screen with a confirmation window.
+     * */
     public void onBacktoAppts(ActionEvent actionEvent) throws IOException {
         Alert cancellation = new Alert(Alert.AlertType.CONFIRMATION);
         cancellation.setTitle("Go back to Appointments Screen");

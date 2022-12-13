@@ -26,7 +26,7 @@ import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-//Class to add appointments
+/** This class will allow the user to add appointments with all the different criteria such as times, dates, and people associated with the appointment. */
 public class AddAppointment implements Initializable {
 
     public TextField ApptIdText;
@@ -42,7 +42,10 @@ public class AddAppointment implements Initializable {
     public DatePicker EndDateDatePicker;
     public ComboBox<LocalTime> EndTimeCombo;
 
-//Will autofill all of the fields of the different variables
+    /** This method will initialize the screen with all of the prompts for the user to input into for adding an appointment.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         StartTimeCombo.setPromptText("Select start time...");
@@ -82,7 +85,8 @@ public class AddAppointment implements Initializable {
 
 
     }
-//Loop that will populate the comboboxes for selecting times of appointments
+
+    /** This method creates a loop of time in 15 minute intervals so that the user can select an appointment time within these intervals. */
     public static ObservableList<LocalTime> apptTimesList() {
         ObservableList<LocalTime> times = FXCollections.observableArrayList();
         LocalTime start = LocalTime.of(1, 00);
@@ -94,6 +98,9 @@ public class AddAppointment implements Initializable {
         return times;
     }
 
+    /** This method will save all of the input entered by the user to add a new appointment to the database.
+     * @param actionEvent The action of saving the input from the user and returning to the main appointments screen.
+     * */
     public void onSaveAppt(ActionEvent actionEvent) throws IOException, SQLException {
 
         try {
@@ -118,6 +125,7 @@ public class AddAppointment implements Initializable {
 
             ZonedDateTime startBusinessHours = ZonedDateTime.of(start.toLocalDate(), LocalTime.of(8,0), ZoneId.of("America/New_York"));
             ZonedDateTime endBusinessHours = startBusinessHours.plusHours(14);
+
 
 
             if (ESTStartZoneTime.isBefore(startBusinessHours) || ESTEndZoneTime.isAfter(endBusinessHours)){
@@ -238,6 +246,8 @@ public class AddAppointment implements Initializable {
 
     }
 
+    /** This method will allow the user to cancel any and/or all data input into the fields.
+     * @param actionEvent This action will cancel any input in this screen and return the user to the main appointments screen.*/
     public void onCancelAppt(ActionEvent actionEvent) throws IOException {
         Alert cancellation = new Alert(Alert.AlertType.CONFIRMATION);
         cancellation.setTitle("Confirm Cancellation");

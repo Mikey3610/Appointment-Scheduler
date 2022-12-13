@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This class allows the user to add customers with all the different criteria such as times, dates, and people associated with the customer. */
 public class AddCustomer implements Initializable {
 
     public TextField CustIDText;
@@ -34,6 +35,9 @@ public class AddCustomer implements Initializable {
     public ComboBox<Countries> CountryCombo;
     public ComboBox<Divisions> DivisionCombo;
 
+    /** This method will cancel any input from the user in the Add Customer screen and return the user to the Customer Screen.
+     * @param actionEvent This action will cancel any input and return the user to the Customer Screen.
+     * */
     public void onCancelCust(ActionEvent actionEvent) throws IOException {
         Alert cancellation = new Alert(Alert.AlertType.CONFIRMATION);
         cancellation.setTitle("Confirm Cancellation");
@@ -50,6 +54,9 @@ public class AddCustomer implements Initializable {
         }
     }
 
+    /** This method will save input from the user for adding customers into the database.
+     * @param actionEvent This action will save all of the input and enter the data into the database.
+     * */
     public void onSaveCust(ActionEvent actionEvent) throws SQLException, IOException {
         try {
             String customer = CustNameText.getText();
@@ -102,13 +109,18 @@ public class AddCustomer implements Initializable {
         }
     }
 
-    //Will display the proper division (region) that corresponds to whatever country the user has selected
+    /** This method will display the proper division (region) that corresponds to whatever country the user has selected.
+     * @param actionEvent The action will take whatever country the user has selected and retrieve the corresponding division. */
     public void onCountryCombo(ActionEvent actionEvent) {
         int countryId = CountryCombo.getValue().getCountryId();
         ObservableList<Divisions> list = DivisionsDAO.getDivisionByCountry(countryId);
         DivisionCombo.setItems(DivisionsDAO.getDivisionByCountry(countryId));
     }
 
+    /** This method initializes the Add Customer screen with the prompts for the user to select from.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CountryCombo.setPromptText("Select Country...");

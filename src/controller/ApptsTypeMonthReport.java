@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 
 import DBAccess.AppointmentsDAO;
 
+/** This class will display the appointments in the database by type and month. */
 public class ApptsTypeMonthReport implements Initializable {
 
     public TableView typeMonthTotalTable;
@@ -26,6 +27,9 @@ public class ApptsTypeMonthReport implements Initializable {
     public TableColumn totalCol;
     public Button BackToReportsMenu;
 
+    /** This method will return the user back to the Reports menu.
+     * @param actionEvent Returns the user to the Reports menu screen.
+     * */
     public void onBackToReportsMenu(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportsMenu.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -35,7 +39,10 @@ public class ApptsTypeMonthReport implements Initializable {
         stage.show();
     }
 
-    //Autopopulates the table
+    /** This method autopopulates this screen with the corresponding type and month data from the appointments.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
