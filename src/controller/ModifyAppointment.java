@@ -18,6 +18,7 @@ import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This class allows the user to make changes to existing appointments in the app. */
 public class ModifyAppointment implements Initializable {
     public TextField apptIdText;
     public TextField apptTitleText;
@@ -33,6 +34,8 @@ public class ModifyAppointment implements Initializable {
     public ComboBox<User> apptUserIdCombo;
     public Appointments selectedAppointment;
 
+    /** This method cancels any input from the user and returns them to the Main Appointment Screen.
+     * */
     public void onCancelModifyAppt(ActionEvent actionEvent) throws IOException {
         Alert cancellation = new Alert(Alert.AlertType.CONFIRMATION);
         cancellation.setTitle("Confirm Cancellation");
@@ -49,6 +52,10 @@ public class ModifyAppointment implements Initializable {
         }
     }
 
+    /** This method saves any changes made to the appointment fields and returns the user to the Main Appointments screen.
+     * @param actionEvent This action saves the input from the user for any edits made to the appointments.
+     * @return Returns with a notifcation to the user if they try to make an appointment outside of 8am-10pm Eastern time.
+     * */
     public void onSaveModifyAppt(ActionEvent actionEvent) {
         try {
 
@@ -165,6 +172,10 @@ public class ModifyAppointment implements Initializable {
 
     }
 
+    /** This method initializes the Modify Appointment screen with autopopulated fields from the selected appointment.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     *  */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         selectedAppointment = MainAppointmentScreen.appointmentToModify();
@@ -197,9 +208,6 @@ public class ModifyAppointment implements Initializable {
             apptUserIdCombo.setItems(UserDAO.selectAllUsers());
             User user = UserDAO.getUserById(selectedAppointment.getUserId());
             apptUserIdCombo.setValue(user);
-
-
-
 
 
         } catch (SQLException throwables) {

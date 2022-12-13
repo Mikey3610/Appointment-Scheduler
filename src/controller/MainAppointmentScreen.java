@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This class shows all of the appointments stored in the system and allows the user to make multiple choices for editing or going to other pages in the app.
+ * */
 public class MainAppointmentScreen implements Initializable {
 
     public ToggleGroup tGroupAppts;
@@ -37,6 +39,10 @@ public class MainAppointmentScreen implements Initializable {
     public TableColumn userIdCol;
     public static Appointments appointmentToModify;
 
+    /** This method initializes the Main Appointments screen with all of the appointments data from the database into a table for the user to see.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -59,6 +65,9 @@ public class MainAppointmentScreen implements Initializable {
         }
     }
 
+    /** This method will exit the program.
+     * @param actionEvent This action closes and exits the program.
+     * */
     public void onExit(ActionEvent actionEvent) {
         Alert exit = new Alert(Alert.AlertType.CONFIRMATION);
         exit.setTitle("Confirm Exit");
@@ -70,18 +79,22 @@ public class MainAppointmentScreen implements Initializable {
         }
     }
 
+    /** This method will filter all appointments to the current week's appointments. */
     public void onViewWeek(ActionEvent actionEvent) throws SQLException {
         appointmentsTable.setItems(AppointmentsDAO.getAppointmentsByWeek());
     }
 
+    /** This method will filter all appointments to the current month's appointments. */
     public void onViewMonth(ActionEvent actionEvent) throws SQLException {
         appointmentsTable.setItems(AppointmentsDAO.getAppointmentsByMonth());
     }
 
+    /** This method will filter to see all appointments. */
     public void onViewAll(ActionEvent actionEvent) throws SQLException {
         appointmentsTable.setItems(AppointmentsDAO.selectAllAppointments());
     }
 
+    /** This method brings the user to the Add Appointmnent screen.*/
     public void onAddAppt(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -91,10 +104,14 @@ public class MainAppointmentScreen implements Initializable {
         stage.show();
     }
 
+    /** This method allows the user to select one of the appointments from the Main Appointments Screen and modify or delete it. */
     public static Appointments appointmentToModify() {
         return appointmentToModify;
     }
 
+    /** This method will bring the user to the Modify Appointment screen if they have an appointment selected on the screen.
+     * @param actionEvent Changes to the Modify Appointment screen.
+     * */
     public void onModifyAppt(ActionEvent actionEvent) throws IOException {
         appointmentToModify = appointmentsTable.getSelectionModel().getSelectedItem();
 
@@ -111,6 +128,9 @@ public class MainAppointmentScreen implements Initializable {
         }
     }
 
+    /** This method deletes the selected appointment and its data from the database.
+     * @param actionEvent This action deletes the selected appointment and its data.
+     * */
     public void onDeleteAppt(ActionEvent actionEvent) throws SQLException {
         Appointments selectedAppt = appointmentsTable.getSelectionModel().getSelectedItem();
         int appointmentId = selectedAppt.getAppointmentId();
@@ -134,7 +154,9 @@ public class MainAppointmentScreen implements Initializable {
         }
     }
 
-
+    /** This method brings the user to the Add Customer screen.
+     * @param actionEvent This actions changes the screen to the Add Customer screen.
+     * */
     public void onCustTable(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -144,6 +166,9 @@ public class MainAppointmentScreen implements Initializable {
         stage.show();
     }
 
+    /** This method brings the user to the Reports Menu screen.
+     * @param actionEvent This action changes the screen to the Reports Menu screen.
+     * */
     public void onReports(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/ReportsMenu.fxml"));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

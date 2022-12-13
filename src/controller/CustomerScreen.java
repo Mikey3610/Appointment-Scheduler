@@ -61,6 +61,7 @@ public class CustomerScreen implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
     /** This method allows the user to select one of the customers from the Customer Screen and modify or delete it. */
     public static Customers customerToModify() {
         return customerToModify;

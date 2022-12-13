@@ -12,9 +12,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+/** This class has all of the SQL commands used by the app for accessing and making any changes to the database for appointments. */
 public abstract class AppointmentsDAO {
 
-    //method that inserts appointment into Appointments object to be displayed on MainAppointmentScreen class
+    /**Method that utilizes SQL commands to insert appointment into Appointments object to be displayed on MainAppointment Screen.
+     * @param userId The user ID for the appointment.
+     * @param title The title for the appointment.
+     * @param description The description of the appointment.
+     * @param location The location of the appointment.
+     * @param contactId The contact ID to be used for the appointment.
+     * @param type The type of appointment.
+     * @param start The start (timestamp) of the appointment.
+     * @param end The end (timestamp) of the appointment.
+     * @param customerId The customer ID for the appointment.
+     * */
     public static int insertAppointment(int userId, String title, String description, String location, int contactId, String type, Timestamp start, Timestamp end, int customerId) throws SQLException {
         String sql = "INSERT INTO APPOINTMENTS (User_ID, Title, Description, Location, Contact_ID, Type, Start, End, Customer_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

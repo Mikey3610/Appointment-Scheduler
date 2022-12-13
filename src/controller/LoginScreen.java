@@ -133,7 +133,11 @@ public class LoginScreen implements Initializable {
         PasswordText.clear();
     }
 
-    /***/
+    /** This class takes all login attempts and stores them in a text file.
+     * The stored info shows whether the login attempt was successful or not and at what time the login was attempted.
+     * @param loginSuccessful Returns a true value if the login credentials were successful and the user could connect.
+     * @param userName Takes the username from the input from the user and stores that in the text log file.
+     * */
     public void logFile(String userName, boolean loginSuccessful) throws IOException {
         String filename ="login_activity.txt", item;
         Scanner keyboard = new Scanner(System.in);

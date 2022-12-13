@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This class allows the user to modify a selected customer's data. */
 public class ModifyCustomer implements Initializable {
 
     public TextField CustIDText;
@@ -35,7 +36,8 @@ public class ModifyCustomer implements Initializable {
     public ComboBox<Divisions> DivisionCombo;
     public Customers selectedCustomer;
 
-
+    /** This method cancels any input from the user and returns them to the Main Appointment Screen.
+     * */
     public void onCancelModifyCust(ActionEvent actionEvent) throws IOException {
         Alert cancellation = new Alert(Alert.AlertType.CONFIRMATION);
         cancellation.setTitle("Confirm Cancellation");
@@ -52,6 +54,10 @@ public class ModifyCustomer implements Initializable {
         }
     }
 
+    /** This method saves any changes made to the customer fields and returns the user to the Main Appointments screen.
+     * @param actionEvent This action saves the input from the user for any edits made to the customers.
+     * @return Returns with a notification to the user if they leave any fields blank.
+     * */
     public void onSaveModifyCust(ActionEvent actionEvent) throws IOException {
         try {
             String customer = CustNameText.getText();
@@ -101,6 +107,8 @@ public class ModifyCustomer implements Initializable {
         }
     }
 
+    /** This method will display the proper division (region) that corresponds to whatever country the user has selected.
+     * @param actionEvent The action will take whatever country the user has selected and retrieve the corresponding division. */
     public void onCountryCombo(ActionEvent actionEvent) {
         int countryId = CountryCombo.getValue().getCountryId();
         ObservableList<Divisions> list = DivisionsDAO.getDivisionByCountry(countryId);
@@ -108,6 +116,10 @@ public class ModifyCustomer implements Initializable {
     }
 
 
+    /** This method autopopulates all of the fields in the Modify Customer window with the selected customer's data.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         selectedCustomer = CustomerScreen.customerToModify();
