@@ -6,7 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
 
-/***/
+/** This class has all of the SQL commands used by the app for accessing and making any changes to the database for countries. */
 public abstract class CountriesDAO {
     public static ObservableList<Countries> getAllCountries(){
         ObservableList<Countries> clist = FXCollections.observableArrayList();
@@ -43,6 +43,9 @@ public abstract class CountriesDAO {
         }
     }
 
+    /** This method takes the data from separate tables in the MySQL database to retrieve a country's division ID.
+     * @return Returns country object.
+     * */
     public static Countries getCountryDivisionId(int divisionId) throws SQLException {
         String sql = "SELECT C.* FROM Countries AS C INNER JOIN First_Level_Divisions AS D ON C.COUNTRY_ID = D.COUNTRY_ID AND D.DIVISION_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);

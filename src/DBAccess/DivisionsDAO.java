@@ -10,7 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** This class has all of the SQL commands used by the app for accessing and making any changes to the database for divisions (region). */
 public abstract class DivisionsDAO {
+    /** This method selects and displays the division from the corresponding country selected by the user from the database.
+     * @param countryId The country ID.
+     * @return Returns the division to the corresponding country.
+     * */
     public static ObservableList<Divisions> getDivisionByCountry(int countryId){
         ObservableList<Divisions> divisions = FXCollections.observableArrayList();
 
@@ -32,6 +37,9 @@ public abstract class DivisionsDAO {
         return divisions;
     }
 
+    /** This method retrieves all of the divisions in the database.
+     * @return Returns all of the divisions.
+     * */
     public static ObservableList<Divisions> getAllDivisions(){
         ObservableList<Divisions> divisions = FXCollections.observableArrayList();
 
@@ -53,6 +61,10 @@ public abstract class DivisionsDAO {
         return divisions;
     }
 
+    /** This method selects the division by the selected Division ID.
+     * @param divisionId The division ID.
+     * @return Returns the Division.
+     * */
     public static Divisions getDivision(int divisionId){
 
         try{

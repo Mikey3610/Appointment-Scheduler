@@ -5,6 +5,7 @@ import Lambdas.WelcomeMessage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/** This method allows the user to connect to the MySQL database which stores all of the appointments/customer data. */
 public abstract class JDBC {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
@@ -16,6 +17,7 @@ public abstract class JDBC {
     private static String password = "Passw0rd!"; // Password
     public static Connection connection;  // Connection Interface
 
+    /** This method makes the connection to the MySQL database. */
     public static void openConnection()
     {
         try {
@@ -36,10 +38,14 @@ public abstract class JDBC {
         }
     }
 
+    /** This method returns the connection to the MySQL database.
+     * @return Returns the connection.
+     * */
     public static Connection getConnection(){
         return connection;
     }
 
+    /** This method closes the database upon exit. */
     public static void closeConnection() {
         try {
             connection.close();
