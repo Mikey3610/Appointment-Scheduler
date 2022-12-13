@@ -43,6 +43,19 @@ public abstract class AppointmentsDAO {
         return rowsAffected;
     }
 
+    /**Method that utilizes SQL commands to update appointment in the Appointments table of the database.
+     * @param customerId The customer ID for the appointment.
+     * @param end The end (timestamp) of the appointment.
+     * @param start The start (timestamp) of the appointment.
+     * @param type The type of appointment.
+     * @param contactId The contact ID to be used for the appointment.
+     * @param location The location of the appointment.
+     * @param description The description of the appointment.
+     * @param appointmentId The appointment ID of the appointment.
+     * @param title The title of the appointment.
+     * @param userId The user ID of the appointment.
+     * @return Returns the row of newly updated data in the MySQL database.
+     * */
     public static int updateAppointment(String title, String description, String location, String type, Timestamp start, Timestamp end, int customerId, int userId, int contactId, int appointmentId) throws SQLException {
         String sql = "UPDATE APPOINTMENTS SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -78,6 +91,10 @@ public abstract class AppointmentsDAO {
     }
      */
 
+    /** This method uses SQL code to delete selected appointments from the database within the app.
+     * @param appointmentId Appointment ID of the appointment where the deletion will occur.
+     * @return Returns the SQL data after deleting the row.
+     * */
     public static int deleteAppointment(int appointmentId) throws SQLException {
         String sql = "DELETE FROM APPOINTMENTS WHERE Appointment_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -86,6 +103,9 @@ public abstract class AppointmentsDAO {
         return rowsAffected;
     }
 
+    /** This method uses SQL code to select all of the available appointments in the database.
+     * @return Returns all of the appointments in an appointments object.
+     * */
     public static ObservableList<Appointments> selectAllAppointments() throws SQLException {
         //String sql = "SELECT Appointment_ID, Title, Description, Location, Contact_ID, Type, Start, End, Customer_ID, User_ID FROM appointments;";
         String sql = "SELECT * FROM appointments;";
@@ -111,6 +131,9 @@ public abstract class AppointmentsDAO {
         return allAppointments;
     }
 
+    /** This method uses SQL commands to select appointments within the current month.
+     * @return Returns all of the appointments that fall within the current month.
+     * */
     public static ObservableList<Appointments> getAppointmentsByMonth() throws SQLException {
             String SQL = "SELECT * FROM APPOINTMENTS WHERE MONTH(start) = MONTH(CURRENT_DATE()) AND YEAR(start) = YEAR(CURRENT_DATE())";
             PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
@@ -136,6 +159,9 @@ public abstract class AppointmentsDAO {
         return allAppointments;
     }
 
+    /** This method uses SQL commands to select appointments within the current week.
+     * @return Returns all of the appointments that fall within the current week.
+     * */
     public static ObservableList<Appointments> getAppointmentsByWeek() throws SQLException {
 
         ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
@@ -162,6 +188,9 @@ public abstract class AppointmentsDAO {
         return allAppointments;
     }
 
+    /** This method uses SQL commands to retrieve the total number of appointments sorted by appointment type and month of the appointment.
+     * @return Returns the type and month in a array object.
+     * */
     public static ObservableList<ContactList> getAppointmentsByTypeAndMonth() throws SQLException {
         String SQL = "SELECT Type, MONTHNAME(Start) AS Month, COUNT(Type) AS Total FROM APPOINTMENTS GROUP BY Type, MONTHNAME(Start)";
         PreparedStatement ps = JDBC.connection.prepareStatement(SQL);
@@ -179,6 +208,9 @@ public abstract class AppointmentsDAO {
         return typeMonth;
     }
 
+    /** This method selects the Contact to get info in the reports menu.
+     * @return Returns the contacts array object.
+     * */
     public static ObservableList<Appointments> selectContact(int contactID) throws SQLException {
         String SQL = "SELECT * FROM appointments where Contact_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(SQL);

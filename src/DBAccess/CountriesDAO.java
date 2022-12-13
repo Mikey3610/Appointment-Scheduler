@@ -6,7 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
 
-
+/***/
 public abstract class CountriesDAO {
     public static ObservableList<Countries> getAllCountries(){
         ObservableList<Countries> clist = FXCollections.observableArrayList();
