@@ -140,6 +140,16 @@ public class ModifyAppointment implements Initializable {
                     alert.showAndWait();
                     return;
                 }
+                if ((apptStartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || apptStartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
+                    alert.showAndWait();
+                    return;
+                }
+                if ((apptEndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || apptEndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
+                    alert.showAndWait();
+                    return;
+                }
             }
 
             if (apptStartCombo.getValue().isAfter(apptEndCombo.getValue())) {
@@ -155,7 +165,6 @@ public class ModifyAppointment implements Initializable {
 
             AppointmentsDAO.updateAppointment(apptTitleText.getText(), apptDescriptionText.getText(), apptLocationText.getText(), apptTypeText.getText(),
                     startTS, endTS, apptCustIdCombo.getValue().getCustomerId(), apptUserIdCombo.getValue().getId(), apptContactCombo.getValue().getContactId(), selectedAppointment.getAppointmentId());
-            //Appointments(int appointmentId, String title, String description, String location, String type, Timestamp startDateTime, Timestamp endDateTime, int customerId, int userId, int contactId)
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainAppointmentScreen.fxml"));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

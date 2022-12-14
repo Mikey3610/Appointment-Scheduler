@@ -90,22 +90,27 @@ public class CustomerScreen implements Initializable {
      * @param actionEvent This action deletes the customer and its data from the database.
      * */
     public void onDeleteCust(ActionEvent actionEvent) throws SQLException {
-        Customers selectedCust = customerTable.getSelectionModel().getSelectedItem();
+        try {
+            Customers selectedCust = customerTable.getSelectionModel().getSelectedItem();
 
-        if (selectedCust == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("No customer selected.");
-            alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Delete Customer");
-            alert.setContentText("Are you sure you want to delete this customer?");
-            Optional<ButtonType> confirmation = alert.showAndWait();
+            if (selectedCust == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("No customer selected.");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Delete Customer");
+                alert.setContentText("Are you sure you want to delete this customer?");
+                Optional<ButtonType> confirmation = alert.showAndWait();
 
-            if (confirmation.get() == ButtonType.OK) {
-                CustomersDAO.deleteCustomer(selectedCust.getCustomerId());
-                customerTable.setItems(CustomersDAO.selectAllCustomers());
+                if (confirmation.get() == ButtonType.OK) {
+                    CustomersDAO.deleteCustomer(selectedCust.getCustomerId());
+                    customerTable.setItems(CustomersDAO.selectAllCustomers());
+                }
             }
+        } catch (SQLException throwables) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please delete appointments associated with this customer from the Appointments screen to continue.");
+            alert.showAndWait();
         }
     }
 
