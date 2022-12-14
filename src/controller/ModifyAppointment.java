@@ -203,9 +203,6 @@ public class ModifyAppointment implements Initializable {
             apptStartCombo.setItems(AddAppointment.apptTimesList());
             apptEndCombo.setItems(AddAppointment.apptTimesList());
 
-            //apptCustIdCombo.setPromptText("Customer ID");
-            //apptUserIdCombo.setPromptText("User ID");
-
             apptContactCombo.setItems(ContactsDAO.selectAllContacts());
             Contacts contact = ContactsDAO.getContactById(selectedAppointment.getContactId());
             apptContactCombo.setValue(contact);

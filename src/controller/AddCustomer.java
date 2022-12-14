@@ -3,6 +3,7 @@ package controller;
 import DBAccess.CountriesDAO;
 import DBAccess.CustomersDAO;
 import DBAccess.DivisionsDAO;
+import Lambdas.WarningLambda;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -68,9 +69,18 @@ public class AddCustomer implements Initializable {
 
 
             if (customer.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Customer name is empty. Please input a name.");
+                WarningLambda message = () -> {
+                    String s = "Customer name is empty. Please input a name.";
+                    return s;
+                };
+
+
+            if (customer.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText(message.warningMessage());//"Customer name is empty. Please input a name.");
                 alert.showAndWait();
                 return;
+            }
             } else if (address.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Address is empty. Please input an address.");
                 alert.showAndWait();
