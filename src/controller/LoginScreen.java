@@ -60,7 +60,8 @@ public class LoginScreen implements Initializable {
 
     /** This method validates the user's input credentials and connects them to the database and brings them to the main appointment screen upon success.
      * It also will log the login attempts, whether successful or not and at what time they were made.
-     * LAMBDA EXPRESSION - Lambda used to convert the time to the current local date time.
+     * LAMBDA EXPRESSION - Lambda used to convert the time to the current local date time. Used to improve readability in the body of the code.
+     * LAMBDA EXPRESSION - Lambda used to concatenate the appointment within 15 minutes notification. Used to improve readability in the body of the code.
      * @param actionEvent This action validates the input credentials to login to the app.
      * @return lambda CurrentTimeLambda will take the current local date time which is then used to check for any upcoming appointments.
      * @return lambda ConcatMessage will concatenate the appointment ID and Date & Time notification to the user for appointments upcoming within 15 minutes.

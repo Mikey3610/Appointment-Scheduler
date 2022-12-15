@@ -56,6 +56,7 @@ public class AddCustomer implements Initializable {
     }
 
     /** This method will save input from the user for adding customers into the database.
+     * LAMBDA EXPRESSION - Lambda that displays error message as a String if customer name field is blank. Used to improve readability in the body of the code.
      * @param actionEvent This action will save all of the input and enter the data into the database.
      * */
     public void onSaveCust(ActionEvent actionEvent) throws SQLException, IOException {
