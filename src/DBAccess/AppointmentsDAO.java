@@ -103,6 +103,14 @@ public abstract class AppointmentsDAO {
         return rowsAffected;
     }
 
+    public static int deleteAppointmentByCustID(int customerId) throws SQLException {
+        String sql = "DELETE FROM APPOINTMENTS WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1, customerId);
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+    }
+
     /** This method uses SQL code to select all of the available appointments in the database.
      * @return Returns all of the appointments in an appointments object.
      * */

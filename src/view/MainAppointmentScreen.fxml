@@ -33,7 +33,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <RadioButton fx:id="ViewApptAll" layoutX="412.0" layoutY="70.0" mnemonicParsing="false" onAction="#onViewAll" text="View All" toggleGroup="$tGroupAppts" />
+            <RadioButton fx:id="ViewApptAll" layoutX="412.0" layoutY="70.0" mnemonicParsing="false" onAction="#onViewAll" selected="true" text="View All" toggleGroup="$tGroupAppts" />
             <Button fx:id="AddAppt" layoutX="96.0" layoutY="472.0" mnemonicParsing="false" onAction="#onAddAppt" text="Add Appointment" />
             <Button fx:id="ModifyAppt" layoutX="244.0" layoutY="472.0" mnemonicParsing="false" onAction="#onModifyAppt" text="Modify Appointment" />
             <Button fx:id="DeleteAppt" layoutX="412.0" layoutY="472.0" mnemonicParsing="false" onAction="#onDeleteAppt" text="Delete Appointment" />

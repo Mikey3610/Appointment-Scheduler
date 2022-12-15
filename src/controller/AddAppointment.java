@@ -195,16 +195,16 @@ public class AddAppointment implements Initializable {
                 return;
             }
 
-            if ((StartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || StartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
-                alert.showAndWait();
-                return;
-            }
-            if ((EndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || EndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
-                alert.showAndWait();
-                return;
-            }
+//            if ((StartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || StartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+//                Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
+//                alert.showAndWait();
+//                return;
+//            }
+//            if ((EndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || EndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+//                Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
+//                alert.showAndWait();
+//                return;
+//            }
 
             //Checks whether there are conflicting times of appts
             int custId = CustIdCombo.getValue().getCustomerId();

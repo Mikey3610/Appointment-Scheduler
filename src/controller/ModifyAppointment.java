@@ -140,16 +140,16 @@ public class ModifyAppointment implements Initializable {
                     alert.showAndWait();
                     return;
                 }
-                if ((apptStartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || apptStartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
-                    alert.showAndWait();
-                    return;
-                }
-                if ((apptEndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || apptEndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
-                    alert.showAndWait();
-                    return;
-                }
+//                if ((apptStartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || apptStartDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+//                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
+//                    alert.showAndWait();
+//                    return;
+//                }
+//                if ((apptEndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY)) || apptEndDateDatePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+//                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a business day between Monday and Friday.");
+//                    alert.showAndWait();
+//                    return;
+//                }
             }
 
             if (apptStartCombo.getValue().isAfter(apptEndCombo.getValue())) {

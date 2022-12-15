@@ -1,5 +1,6 @@
 package controller;
 
+import DBAccess.AppointmentsDAO;
 import DBAccess.CustomersDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -100,17 +101,17 @@ public class CustomerScreen implements Initializable {
             } else {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Delete Customer");
-                alert.setContentText("Are you sure you want to delete this customer?");
+                alert.setContentText("All appointments for this customer will be deleted. Are you sure you want to delete this customer?");
                 Optional<ButtonType> confirmation = alert.showAndWait();
 
                 if (confirmation.get() == ButtonType.OK) {
+                    AppointmentsDAO.deleteAppointmentByCustID(selectedCust.getCustomerId());
                     CustomersDAO.deleteCustomer(selectedCust.getCustomerId());
                     customerTable.setItems(CustomersDAO.selectAllCustomers());
                 }
             }
         } catch (SQLException throwables) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please delete appointments associated with this customer from the Appointments screen to continue.");
-            alert.showAndWait();
+            throwables.printStackTrace();
         }
     }
 
