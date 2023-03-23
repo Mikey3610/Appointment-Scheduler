@@ -13,7 +13,7 @@ import java.time.*;
 
 /** This class creates an app that will allow a user to schedule appointments with different parameters and accurately keep track of the times that are input.*/
 public class Main extends Application {
-
+//comment
     /** This is the main method.
      * This is the first method that gets called when you run this Java program.
      * It will connect to the SQL database that is used to keep track of, update, delete, and modify data.
