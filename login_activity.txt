@@ -37,3 +37,19 @@ User test successfully logged in at 2022-12-14T18:12:22.506469600
 User test successfully logged in at 2022-12-14T18:30:39.281594300
 User user made an invalid login at 2023-03-23T18:03:02.210087100
 User test successfully logged in at 2023-03-23T18:04:48.685514800
+User test successfully logged in at 2023-03-23T18:08:41.157343400
+User test successfully logged in at 2023-03-23T18:36:14.556025400
+User test successfully logged in at 2023-04-01T13:53:45.692437100
+User test successfully logged in at 2023-04-11T13:03:28.171072400
+User test successfully logged in at 2023-04-15T16:45:06.014415300
+User test successfully logged in at 2023-04-15T16:55:33.266530100
+User test successfully logged in at 2023-04-15T16:59:27.054990900
+User test successfully logged in at 2023-04-15T16:59:46.159016300
+User test successfully logged in at 2023-04-15T17:00:49.997309600
+User test successfully logged in at 2023-04-15T17:01:52.296242300
+User test successfully logged in at 2023-04-15T17:04:11.108396700
+User test successfully logged in at 2023-04-15T17:08:12.717943600
+User test successfully logged in at 2023-04-15T17:09:22.193740100
+User test successfully logged in at 2023-04-15T19:04:03.206915700
+User test successfully logged in at 2023-04-17T17:00:50.205515500
+User test successfully logged in at 2023-04-18T16:01:16.230823500

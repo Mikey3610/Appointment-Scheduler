@@ -2,13 +2,17 @@ package controller;
 
 import DBAccess.AppointmentsDAO;
 import DBAccess.CustomersDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.Appointments;
 import model.Customers;
@@ -38,6 +42,10 @@ public class MainAppointmentScreen implements Initializable {
     public TableColumn customerIdCol;
     public TableColumn userIdCol;
     public static Appointments appointmentToModify;
+    @FXML
+    public TextField apptSearchText;
+
+    private ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
 
     /** This method initializes the Main Appointments screen with all of the appointments data from the database into a table for the user to see.
      * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
@@ -177,4 +185,30 @@ public class MainAppointmentScreen implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void onApptSearchClick(ActionEvent actionEvent) throws SQLException {
+        ObservableList<Appointments> allAppointments = AppointmentsDAO.selectAllAppointments();
+        ObservableList<Appointments> apptFound = FXCollections.observableArrayList();
+        String searchString = apptSearchText.getText();
+
+        for (Appointments a : allAppointments) {
+            if (String.valueOf(a.getAppointmentId()).contains(searchString) ||
+                    a.getTitle().contains(searchString)) {
+                apptFound.add(a);
+            }
+        }
+        appointmentsTable.setItems(apptFound);
+
+        if (apptFound.size() == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment not found.");
+            alert.showAndWait();
+        }
+    }
+
+    public void apptSearchClicked(KeyEvent keyEvent) throws SQLException {
+        if (apptSearchText.getText().isEmpty()) {
+            appointmentsTable.setItems(AppointmentsDAO.selectAllAppointments());
+        }
+    }
+
 }
