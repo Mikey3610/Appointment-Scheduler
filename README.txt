@@ -15,15 +15,12 @@ Application version - IntelliJ IDEA 2021.1.3 (Community Edition)
                       GC: G1 Young Generation, G1 Old Generation
                       Memory: 768M
                       Cores: 4
-
                       Kotlin: 211-1.4.32-release-IJ7628.19
-Date - 12/13/2022
+                      
+                      MySQL Driver Connector: mysql-connector-java-8.0.25
 
 How to run -  To run the application, run the main method.
 On the initial login screen, user the credentials "test" for the username and "test" for the password.
 Alternatively, use the credentials "admin" for the username and "admin" for the password.
 
-Additional Report - The third report shows a sum of the appointments by customer ID.
-
-MySQL Driver Connector - mysql-connector-java-8.0.25
 
